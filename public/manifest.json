@@ -1,0 +1,6 @@
+{
+  "short_name": "esw-ui-example",
+  "name": "esw-ui-example",
+  "start_url": "./index.html",
+  "display": "standalone"
+}
