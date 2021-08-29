@@ -4,7 +4,8 @@ import {
   EventName,
   EventService,
   intKey,
-  Prefix
+  Prefix,
+  Subscription
 } from '@tmtsoftware/esw-ts'
 import {
   Button,
@@ -12,7 +13,6 @@ import {
   Divider,
   Input,
   message,
-  Space,
   Table,
   Typography,
   Form
@@ -24,6 +24,7 @@ export const PublishEvent = (): JSX.Element => {
   const [prefix, setPrefix] = useState('')
   const [keyName, setKeyName] = useState('')
   const [events, setEvents] = useState<Event[]>([])
+  const [subscription, setSubscription] = useState<Subscription>()
   const { auth } = useAuth()
   const authData = { tokenFactory: () => auth?.token() }
 
@@ -34,15 +35,20 @@ export const PublishEvent = (): JSX.Element => {
       message.error(`Event: ${event.eventName.name} is invalid`)
     }
   }
-
+  const unSubscribe = () => {
+    subscription?.cancel()
+    setSubscription(undefined)
+  }
   const subscribe = async () => {
     const eventService = await EventService(authData)
-    eventService.subscribe(
-      new Set([
-        new EventKey(Prefix.fromString(prefix), new EventName(keyName))
-      ]),
-      1
-    )(handleEvent)
+    setSubscription(
+      eventService.subscribe(
+        new Set([
+          new EventKey(Prefix.fromString(prefix), new EventName(keyName))
+        ]),
+        1
+      )(handleEvent)
+    )
   }
 
   const columns = [
@@ -70,7 +76,7 @@ export const PublishEvent = (): JSX.Element => {
       title={
         <Typography.Title level={2}>Subscribe Event Example</Typography.Title>
       }>
-      <Form onFinish={subscribe}>
+      <Form onFinish={() => (subscription ? unSubscribe() : subscribe())}>
         <Form.Item label='Source Prefix'>
           <Input
             value={prefix}
@@ -87,7 +93,7 @@ export const PublishEvent = (): JSX.Element => {
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 16, span: 16 }}>
           <Button htmlType='submit' type='primary' disabled={keyName === ''}>
-            Subscribe
+            {subscription ? 'UnSubscribe' : 'Subscribe'}
           </Button>
         </Form.Item>
       </Form>
