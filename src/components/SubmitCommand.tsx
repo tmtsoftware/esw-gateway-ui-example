@@ -1,6 +1,5 @@
 import {
   CommandService,
-  CommandType,
   ComponentId,
   longKey,
   Observe,
@@ -16,7 +15,8 @@ import {
   message,
   Select,
   Space,
-  Typography
+  Typography,
+  Form
 } from 'antd'
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
@@ -32,7 +32,7 @@ export const SubmitCommand = (): JSX.Element => {
   const { auth } = useAuth()
 
   const authData = { tokenFactory: () => auth?.token() }
-  const submit = async (prefix: string, command: string) => {
+  const submit = async () => {
     try {
       const sleepInMs = longKey('timeInMs').set([3000])
       const commandService = await CommandService(
@@ -73,47 +73,53 @@ export const SubmitCommand = (): JSX.Element => {
       title={
         <Typography.Title level={2}>Submit Command Example</Typography.Title>
       }>
-      <Space direction={'vertical'}>
-        <label htmlFor='commandType'>Command Type</label>
-        <Select
-          id='commandType'
-          value={commandType}
-          onChange={(e) => setCommandType(e)}>
-          <Select.Option value='Setup'>Setup</Select.Option>
-          <Select.Option value='Observe'>Observe</Select.Option>
-        </Select>
-        <label htmlFor='componentType'>Component Type</label>
-        <Select
-          id='componentType'
-          value={componentType}
-          onChange={(e) => setComponentType(e)}>
-          <Select.Option value='HCD'>HCD</Select.Option>
-          <Select.Option value='Assembly'>Assembly</Select.Option>
-        </Select>
-        <label>Prefix</label>
-        <Input
-          value={prefix}
-          placeholder='ESW.assembly123'
-          onChange={(e) => setPrefix(e.target.value)}
-        />
-        <label>Command Name</label>
-        <Input
-          value={command}
-          placeholder='noop'
-          onChange={(e) => setCommand(e.target.value)}
-        />
-        <Button
-          type='primary'
-          disabled={prefix === '' || command === ''}
-          onClick={() => submit(prefix, command)}>
-          Submit
-        </Button>
-        <Divider />
-        <Typography.Title level={2}>Result</Typography.Title>
-        <Typography.Paragraph>
-          {result && <pre>{JSON.stringify(result, null, 4)}</pre>}
-        </Typography.Paragraph>
-      </Space>
+      <Form onFinish={submit}>
+        <Form.Item label='Command Type' required>
+          <Select
+            id='commandType'
+            value={commandType}
+            onChange={(e) => setCommandType(e)}>
+            <Select.Option value='Setup'>Setup</Select.Option>
+            <Select.Option value='Observe'>Observe</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label='Component Type' required>
+          <Select
+            id='componentType'
+            value={componentType}
+            onChange={(e) => setComponentType(e)}>
+            <Select.Option value='HCD'>HCD</Select.Option>
+            <Select.Option value='Assembly'>Assembly</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label='Prefix' required>
+          <Input
+            value={prefix}
+            placeholder='ESW.assembly123'
+            onChange={(e) => setPrefix(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item label='Command Name' required>
+          <Input
+            value={command}
+            placeholder='noop'
+            onChange={(e) => setCommand(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item wrapperCol={{ offset: 16, span: 16 }}>
+          <Button
+            htmlType='submit'
+            type='primary'
+            disabled={prefix === '' || command === ''}>
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+      <Divider />
+      <Typography.Title level={2}>Result</Typography.Title>
+      <Typography.Paragraph>
+        {result && <pre>{JSON.stringify(result, null, 4)}</pre>}
+      </Typography.Paragraph>
     </Card>
   )
 }

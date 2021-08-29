@@ -14,7 +14,8 @@ import {
   message,
   Space,
   Table,
-  Typography
+  Typography,
+  Form
 } from 'antd'
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
@@ -69,28 +70,29 @@ export const PublishEvent = (): JSX.Element => {
       title={
         <Typography.Title level={2}>Subscribe Event Example</Typography.Title>
       }>
-      <Space direction={'vertical'}>
-        <label>Source Prefix</label>
-        <Input
-          value={prefix}
-          placeholder='ESW.assembly123'
-          onChange={(e) => setPrefix(e.target.value)}
-        />
-        <label>Event KeyName</label>
-        <Input
-          value={keyName}
-          placeholder='counterEvent'
-          onChange={(e) => setKeyName(e.target.value)}
-        />
-        <Button
-          type='primary'
-          disabled={keyName === ''}
-          onClick={() => subscribe()}>
-          Subscribe
-        </Button>
-        <Divider />
-        <Table pagination={false} dataSource={events} columns={columns} />
-      </Space>
+      <Form onFinish={subscribe}>
+        <Form.Item label='Source Prefix'>
+          <Input
+            value={prefix}
+            placeholder='ESW.assembly123'
+            onChange={(e) => setPrefix(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item label='Event Keyname'>
+          <Input
+            value={keyName}
+            placeholder='counterEvent'
+            onChange={(e) => setKeyName(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item wrapperCol={{ offset: 16, span: 16 }}>
+          <Button htmlType='submit' type='primary' disabled={keyName === ''}>
+            Subscribe
+          </Button>
+        </Form.Item>
+      </Form>
+      <Divider />
+      <Table pagination={false} dataSource={events} columns={columns} />
     </Card>
   )
 }
