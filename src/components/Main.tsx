@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { useAuth } from '../hooks/useAuth'
-import { PublishEvent } from './PublishEvent'
 import { RedirectToLogin } from './RedirectToLogin'
 import { SubmitCommand } from './SubmitCommand'
+import { SubscribeEvent } from './SubscribeEvent'
 
 export const Main = (): JSX.Element => {
   const { auth } = useAuth()
   if (!auth) return <div>Loading</div>
   const isAuthenticated = auth?.isAuthenticated() ?? false
+
   return isAuthenticated ? (
     <div
       style={{
@@ -16,7 +17,7 @@ export const Main = (): JSX.Element => {
         paddingTop: '2rem'
       }}>
       <SubmitCommand />
-      <PublishEvent />
+      <SubscribeEvent />
     </div>
   ) : (
     <RedirectToLogin />

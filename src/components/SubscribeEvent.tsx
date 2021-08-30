@@ -20,7 +20,7 @@ import {
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
-export const PublishEvent = (): JSX.Element => {
+export const SubscribeEvent = (): JSX.Element => {
   const [prefix, setPrefix] = useState('')
   const [keyName, setKeyName] = useState('')
   const [events, setEvents] = useState<Event[]>([])
