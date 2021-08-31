@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useAuth } from '../hooks/useAuth'
-import { RedirectToLogin } from './RedirectToLogin'
+import { Login } from './Login'
 import { SubmitCommand } from './SubmitCommand'
 import { SubscribeEvent } from './SubscribeEvent'
 
@@ -20,6 +20,6 @@ export const Main = (): JSX.Element => {
       <SubscribeEvent />
     </div>
   ) : (
-    <RedirectToLogin />
+    <Login />
   )
 }

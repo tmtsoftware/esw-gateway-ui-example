@@ -20,7 +20,11 @@ import {
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
-export const SubscribeEvent = (): JSX.Element => {
+export const SubscribeEvent = ({
+  _eventService
+}: {
+  _eventService?: EventService
+}): JSX.Element => {
   const [prefix, setPrefix] = useState('')
   const [keyName, setKeyName] = useState('')
   const [events, setEvents] = useState<Event[]>([])
@@ -40,15 +44,17 @@ export const SubscribeEvent = (): JSX.Element => {
     setSubscription(undefined)
   }
   const subscribe = async () => {
-    const eventService = await EventService(authData)
-    setSubscription(
-      eventService.subscribe(
-        new Set([
-          new EventKey(Prefix.fromString(prefix), new EventName(keyName))
-        ]),
-        1
-      )(handleEvent)
-    )
+    const eventServices = _eventService
+      ? _eventService
+      : await EventService(authData)
+
+    const subscription = eventServices.subscribe(
+      new Set([
+        new EventKey(Prefix.fromString(prefix), new EventName(keyName))
+      ]),
+      1
+    )(handleEvent)
+    setSubscription(subscription)
   }
 
   const columns = [
@@ -76,9 +82,13 @@ export const SubscribeEvent = (): JSX.Element => {
       title={
         <Typography.Title level={2}>Subscribe Event Example</Typography.Title>
       }>
-      <Form onFinish={() => (subscription ? unSubscribe() : subscribe())}>
+      <Form
+        onFinish={() => {
+          subscription ? unSubscribe() : subscribe()
+        }}>
         <Form.Item label='Source Prefix'>
           <Input
+            role='SourcePrefix'
             value={prefix}
             placeholder='ESW.assembly123'
             onChange={(e) => setPrefix(e.target.value)}
@@ -86,19 +96,29 @@ export const SubscribeEvent = (): JSX.Element => {
         </Form.Item>
         <Form.Item label='Event Keyname'>
           <Input
+            role='keyName'
             value={keyName}
             placeholder='counterEvent'
             onChange={(e) => setKeyName(e.target.value)}
           />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 16, span: 16 }}>
-          <Button htmlType='submit' type='primary' disabled={keyName === ''}>
+          <Button
+            role='subscribe'
+            onClick={() => (subscription ? unSubscribe() : subscribe())}
+            type='primary'
+            disabled={keyName === ''}>
             {subscription ? 'UnSubscribe' : 'Subscribe'}
           </Button>
         </Form.Item>
       </Form>
       <Divider />
-      <Table pagination={false} dataSource={events} columns={columns} />
+      <Table
+        pagination={false}
+        rowKey={(d) => d.eventId}
+        dataSource={events}
+        columns={columns}
+      />
     </Card>
   )
 }
