@@ -15,10 +15,32 @@ import {
   message,
   Select,
   Typography,
-  Form
+  Form,
+  Alert,
+  AlertProps,
+  Badge
 } from 'antd'
+import type {
+  PresetColorType,
+  PresetStatusColorType
+} from 'antd/lib/_util/colors'
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
+
+const getResultType = (
+  resultType: SubmitResponse['_type']
+): PresetColorType => {
+  switch (resultType) {
+    case 'Started':
+      return 'yellow'
+    case 'Completed':
+      return 'green'
+    case 'Cancelled':
+      return 'yellow'
+    default:
+      return 'red'
+  }
+}
 
 export const SubmitCommand = ({
   _commandService
@@ -27,6 +49,7 @@ export const SubmitCommand = ({
 }): JSX.Element => {
   const [prefix, setPrefix] = useState<string>('')
   const [command, setCommand] = useState<string>('')
+  const [sleepTime, setSleepTime] = useState<number>()
   const [result, setResult] = useState<SubmitResponse>()
   const [commandType, setCommandType] = useState<'Setup' | 'Observe'>('Setup')
   const [componentType, setComponentType] = useState<'HCD' | 'Assembly'>(
@@ -38,7 +61,7 @@ export const SubmitCommand = ({
 
   const submit = async () => {
     try {
-      const sleepInMs = longKey('timeInMs').set([3000])
+      const sleepInMs = longKey('sleep').set([sleepTime ? sleepTime : 0])
       const commandService = _commandService
         ? _commandService
         : await CommandService(
@@ -74,8 +97,8 @@ export const SubmitCommand = ({
   return (
     <Card
       style={{
-        minWidth: '30rem',
-        minHeight: '12.5rem'
+        maxWidth: '30rem',
+        maxHeight: '40rem'
       }}
       title={
         <Typography.Title level={2}>Submit Command Example</Typography.Title>
@@ -115,6 +138,15 @@ export const SubmitCommand = ({
             onChange={(e) => setCommand(e.target.value)}
           />
         </Form.Item>
+        <Form.Item label='Sleep' hidden={command !== 'sleep'}>
+          <Input
+            role='sleep'
+            value={sleepTime}
+            placeholder='Enter value in terms of milliseconds'
+            type='number'
+            onChange={(e) => setSleepTime(Number(e.target.value))}
+          />
+        </Form.Item>
         <Form.Item wrapperCol={{ offset: 16, span: 16 }}>
           <Button
             role='Submit'
@@ -128,7 +160,13 @@ export const SubmitCommand = ({
       <Divider />
       <Typography.Title level={2}>Result</Typography.Title>
       <Typography.Paragraph>
-        {result && <pre role='result'>{JSON.stringify(result, null, 4)}</pre>}
+        {result && (
+          <Badge.Ribbon
+            color={getResultType(result._type)}
+            style={{ width: '0.75rem', height: '0.75rem' }}>
+            <pre role='result'>{JSON.stringify(result, null, 4)}</pre>
+          </Badge.Ribbon>
+        )}
       </Typography.Paragraph>
     </Card>
   )

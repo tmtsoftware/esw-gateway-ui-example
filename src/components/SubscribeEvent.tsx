@@ -76,8 +76,8 @@ export const SubscribeEvent = ({
   return (
     <Card
       style={{
-        minWidth: '30rem',
-        minHeight: '12.5rem'
+        maxWidth: '30rem',
+        maxHeight: '40rem'
       }}
       title={
         <Typography.Title level={2}>Subscribe Event Example</Typography.Title>
@@ -114,8 +114,9 @@ export const SubscribeEvent = ({
       </Form>
       <Divider />
       <Table
+        scroll={{ y: 240 }}
         pagination={false}
-        rowKey={(d) => d.eventId}
+        rowKey={(e) => e.eventId}
         dataSource={events}
         columns={columns}
       />
