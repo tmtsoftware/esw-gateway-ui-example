@@ -8,22 +8,17 @@ import {
   SubmitResponse
 } from '@tmtsoftware/esw-ts'
 import {
+  Badge,
   Button,
   Card,
   Divider,
+  Form,
   Input,
   message,
   Select,
-  Typography,
-  Form,
-  Alert,
-  AlertProps,
-  Badge
+  Typography
 } from 'antd'
-import type {
-  PresetColorType,
-  PresetStatusColorType
-} from 'antd/lib/_util/colors'
+import type { PresetColorType } from 'antd/lib/_util/colors'
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
