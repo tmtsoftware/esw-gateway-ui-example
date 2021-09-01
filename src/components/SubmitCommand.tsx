@@ -1,3 +1,4 @@
+//#submit-command-imports
 import {
   CommandService,
   ComponentId,
@@ -21,7 +22,9 @@ import {
 import type { PresetColorType } from 'antd/lib/_util/colors'
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
+//#submit-command-imports
 
+//#color-helper
 const getResultType = (
   resultType: SubmitResponse['_type']
 ): PresetColorType => {
@@ -36,27 +39,35 @@ const getResultType = (
       return 'red'
   }
 }
+//#color-helper
 
+//#submit-command
+// #submit-command-states
 export const SubmitCommand = ({
   _commandService
 }: {
   _commandService?: CommandService
 }): JSX.Element => {
+  const { auth } = useAuth()
+  const authData = { tokenFactory: () => auth?.token() }
+  //#submit-command
+
   const [prefix, setPrefix] = useState<string>('')
   const [command, setCommand] = useState<string>('')
   const [sleepTime, setSleepTime] = useState<number>()
   const [result, setResult] = useState<SubmitResponse>()
   const [commandType, setCommandType] = useState<'Setup' | 'Observe'>('Setup')
+  //#submit-action
   const [componentType, setComponentType] = useState<'HCD' | 'Assembly'>(
     'Assembly'
   )
-  const { auth } = useAuth()
-
-  const authData = { tokenFactory: () => auth?.token() }
+  // #submit-command-states
 
   const submit = async () => {
     try {
-      const sleepInMs = longKey('sleep').set([sleepTime ? sleepTime : 0])
+      const sleepInMs = longKey('sleepInSeconds').set([
+        sleepTime ? sleepTime : 0
+      ])
       const commandService = _commandService
         ? _commandService
         : await CommandService(
@@ -87,9 +98,11 @@ export const SubmitCommand = ({
     }
   }
 
+  //#submit-command
   if (auth === undefined) return <div>...loading</div>
-
+  //#submit-action
   return (
+    // #submit-command-form
     <Card
       style={{
         maxWidth: '30rem',
@@ -98,6 +111,7 @@ export const SubmitCommand = ({
       title={
         <Typography.Title level={2}>Submit Command Example</Typography.Title>
       }>
+      {/* //#submit-command */}
       <Form>
         <Form.Item label='Command Type' required>
           <Select
@@ -152,6 +166,7 @@ export const SubmitCommand = ({
           </Button>
         </Form.Item>
       </Form>
+      {/* //#submit-command */}
       <Divider />
       <Typography.Title level={2}>Result</Typography.Title>
       <Typography.Paragraph>
@@ -163,6 +178,8 @@ export const SubmitCommand = ({
           </Badge.Ribbon>
         )}
       </Typography.Paragraph>
+      {/* // #submit-command-form */}
     </Card>
   )
 }
+//#submit-command

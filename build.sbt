@@ -24,11 +24,15 @@ lazy val openSite =
     }
   }
 
-/* ================= Paradox Project ============== */
-lazy val `docs` = project
+/* ================= Root Project ============== */
+lazy val `esw-ui-example` = project
   .in(file("."))
-  .enablePlugins(GithubPublishPlugin, ParadoxMaterialSitePlugin)
+  .enablePlugins(GithubPublishPlugin)
+  .aggregate(docs)
   .settings(
     commands += openSite.value,
-    Settings.makeSiteMappings()
+    Settings.makeSiteMappings(docs)
   )
+
+lazy val docs = project
+  .enablePlugins(ParadoxMaterialSitePlugin)

@@ -1,3 +1,4 @@
+// #login-page
 import React, { useEffect } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
@@ -8,3 +9,4 @@ export const Login = (): JSX.Element => {
 
   return <div>Loading...</div>
 }
+// #login-page
