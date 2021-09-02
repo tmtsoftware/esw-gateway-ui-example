@@ -106,7 +106,7 @@ export const SubmitCommand = ({
     <Card
       style={{
         maxWidth: '30rem',
-        maxHeight: '40rem'
+        maxHeight: '45rem'
       }}
       title={
         <Typography.Title level={2}>Submit Command Example</Typography.Title>

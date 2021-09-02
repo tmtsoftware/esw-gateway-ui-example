@@ -8,12 +8,12 @@ Visit [here](https://tmtsoftware.github.io/csw/0.1.0-SNAPSHOT/commons/create-com
 
 ## Start an Assembly using esw-shell
 
-First, lets install esw-shell utility which renders ammonite shell with basic api's for us to orchestrate the backend services.
+First, lets install esw-shell utility which renders ammonite repl with basic api's for us to orchestrate the backend services.
 
 ```bash
 cs install esw-shell:0.3.0-RC1
 esw-shell start 
-@                 // you are inside ammonite shell now
+@                 // you are inside ammonite repl now
 ```
 
 Visit [here](https://tmtsoftware.github.io/esw/0.1.0-SNAPSHOT/eswshell/esw-shell.html) to learn more about the esw-shell utility.

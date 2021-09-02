@@ -77,7 +77,7 @@ export const SubscribeEvent = ({
     <Card
       style={{
         maxWidth: '30rem',
-        maxHeight: '40rem'
+        maxHeight: '45rem'
       }}
       title={
         <Typography.Title level={2}>Subscribe Event Example</Typography.Title>

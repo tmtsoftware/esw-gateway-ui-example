@@ -1,10 +1,10 @@
 # Creating a Web Application
 
-This flow demonstrates how to use the template to create our project, how to add simple routes, UI components,
+This flow demonstrates how to use the template to create our project, how to add UI components for adding particular features,
 and how to build and test it.
 
 In this tutorial, we will first generate the application from the template, and build it to ensure tools are in place.
-Then, we will delete the default implementation and replace it with our own implementation of a `submit command` UI component. To
+Then, we will delete the default implementation and replace it with our own implementation of a `Submit command to an assembly` & `Subscribe to an event` UI component. To
 do this, we will delete much of the template code and rewrite our own components custom to our implementation.
 
 ## Generate Application
@@ -41,6 +41,10 @@ They will be reviewed and updated once again as part of ESW Phase 2.
 
 At this point, you may want to open the project in an Integrated Development Environment (IDE), such as Intellij,
 if you are using one.  The template creates a Typescript/npm-based frontend. We recommend VS Code or Intellij for the frontend applications.
+
+To open the UI project in VS Code, click on `File->Open` Or To open the UI project in Intellij, click on `File->New Project from Existing Sources`
+
+Then browsing to the UI directory, open the `sample` project.  It should have a package.json file in it.
 
 ## Create the Frontend
 
@@ -105,14 +109,6 @@ esw-services start -g
 
 ```
 
-Set `INTERFACE_NAME` and `AAS_INTERFACE_NAME` environment variables with the Network interface of your machine. These are needed during startup of the application, so that it is able to connect to Location Service and register its IP address
-and location information.
-
-* During development in your local machine, these can point to same Network interface.
-* During production deployment, these will point to a outside (AAS_INTERFACE_NAME) and inside (INTERFACE_NAME) Network interface.
-
-For more details, refer CSW [environment variables](https://tmtsoftware.github.io/csw/deployment/env-vars.html) and [network topology](https://tmtsoftware.github.io/csw/deployment/network-topology.html).
-
 Try reloading the front end in browser,
 
 ```bash
@@ -120,7 +116,7 @@ npm start
 ```
 
 You should be getting redirected to keycloak login page.
-Try logging in with one of predefined users in csw-services. 
+Try logging in with one of predefined users in csw-services.
 
 Visit [here](https://tmtsoftware.github.io/csw/0.1.0-SNAPSHOT/apps/cswservices.html#predefined-users-) to find the predefined users.
 
