@@ -134,5 +134,5 @@ We can get rid of the unwanted css generated from the template:
 
 ### Next Steps
 
-* Follow the tutorial @ref:[here](./submit-commands.md) to add an Submit Command Example.
-* Follow the tutorial @ref:[here](./subscribe-event.md) to add an Subscribe Event Example.
+* Follow the tutorial @ref:[here](./submit-commands.md) to add Submit Command Example.
+* Follow the tutorial @ref:[here](./subscribe-event.md) to add Subscribe Event Example.

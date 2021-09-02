@@ -7,13 +7,6 @@ ThisBuild / docsRepo := "https://github.com/tmtsoftware/tmtsoftware.github.io.gi
 ThisBuild / docsParentDir := "esw-ui-example"
 ThisBuild / gitCurrentRepo := "https://github.com/tmtsoftware/esw-ui-example"
 
-version := {
-  sys.props.get("prod.publish") match {
-    case Some("true") => version.value
-    case _            => "0.1.0-SNAPSHOT"
-  }
-}
-
 lazy val openSite =
   Def.setting {
     Command.command("openSite") { state =>
@@ -36,3 +29,11 @@ lazy val `esw-ui-example` = project
 
 lazy val docs = project
   .enablePlugins(ParadoxMaterialSitePlugin)
+  .settings(
+    version := {
+      sys.props.get("prod.publish") match {
+        case Some("true") => version.value
+        case _            => "0.1.0-SNAPSHOT"
+      }
+    }
+  )

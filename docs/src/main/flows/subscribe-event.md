@@ -96,7 +96,7 @@ esw-shell start
 
 Visit [here](https://tmtsoftware.github.io/esw/0.1.0-SNAPSHOT/eswshell/esw-shell.html) to learn more about the esw-shell utility.
 
-We are using [this](https://tmtsoftware.github.io/esw/0.1.0-SNAPSHOT/eswshell/esw-shell.html#using-custom-component-handlers) API to publish events.
+We are using eventService's defaultPublisher API to publish events.
 
 ```scala
 @ val counter = 0

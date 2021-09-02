@@ -15,6 +15,7 @@ import { expect } from 'chai'
 import React from 'react'
 import { anything, instance, mock, when } from 'ts-mockito'
 import { SubscribeEvent } from '../../src/components/SubscribeEvent'
+
 describe('Subscribe event example', () => {
   const eventServiceMock = mock<EventService>(TestUtils.EventServiceImpl)
   const eventServiceInstance = instance(eventServiceMock)

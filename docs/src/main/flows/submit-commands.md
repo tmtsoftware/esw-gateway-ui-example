@@ -125,4 +125,4 @@ sleep : 2
 
 That's all we needed to do for adding an Submit command feature!!!
 
-* Follow the tutorial @ref:[here](./subscribe-event.md) to add an Subscribe Event Example.
+* Follow the tutorial @ref:[here](./subscribe-event.md) to add Subscribe Event Example.
