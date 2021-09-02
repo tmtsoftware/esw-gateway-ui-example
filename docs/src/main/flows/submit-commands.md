@@ -8,7 +8,9 @@ Visit [here](https://tmtsoftware.github.io/csw/0.1.0-SNAPSHOT/commons/create-com
 
 ## Start an Assembly using esw-shell
 
-First, lets install esw-shell utility which renders ammonite repl with basic api's for us to orchestrate the backend services.
+Before moving ahead, if you have not started backend services. Then let's start backend services by following @ref:[this](./base-flow.md){#starting-backend-services} steps.
+
+Now, lets setup an assembly using esw-shell utility. It starts an ammonite repl with basic api's for us to orchestrate the backend services.
 
 ```bash
 cs install esw-shell:0.3.0-RC1
@@ -48,7 +50,9 @@ spawnAssemblyWithHandler(
 
 This should start an assembly with prefix `ESW.defaultAssembly`.
 
-## Add Submit Command component
+## Add Submit Command Component
+
+Assuming that you have followed atleast the @ref:[basic flow](./base-flow.md), we can go further and add submiting an command to an assembly feature in our UI.
 
 Add `SubmitCommand.tsx` in `src/components` folder.
 
@@ -56,7 +60,7 @@ SubmitCommand.tsx looks like following:
 
 @@@note
 You can refer the source code of the completed application at any point in the course of this tutorial.
-You can find it [here](https:github.com/tmtsoftware/esw-ui-example)
+You can find it @link:[here](https:github.com/tmtsoftware/esw-ui-example)
 @@@
 
 Typescript
@@ -69,12 +73,12 @@ Typescript
 
 Let's add the Form component's for the input fields.
 
-1. CommandType - A Selectable with Options(Setup/Observe)
-1. ComponentType - A Selectable with Options(Assembly/HCD)
-1. Prefix - A Text Input (user to put Appropriate Prefix of earlier Started Assembly)
-1. Command - A Text Input (user to put command `sleep` or anything else)
-1. Sleep - A Optional field visible only when command is `sleep`.
-1. Submit - A Button to submit command.
+* CommandType - A Selectable with Options(Setup/Observe)
+* ComponentType - A Selectable with Options(Assembly/HCD)
+* Prefix - A Text Input (user to put Appropriate Prefix of earlier Started Assembly)
+* Command - A Text Input (user to put command `sleep` or anything else)
+* Sleep - A Optional field visible only when command is `sleep`.
+* Submit - A Button to submit command.
 
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command-form }
@@ -85,6 +89,8 @@ Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command-states }
 
 Now finally, add the `submit` action to be called on Submit button click(i.e. `onFinish` handle of Form component)
+
+This method makes use of [command service](https://tmtsoftware.github.io/esw-ts/services/command-service.html) typescript client which sits on top of the gateway server Command Service routes.
 
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-action }
@@ -107,7 +113,7 @@ Typescript
 
 UI should render the following view at this moment.
 
-![submit-command.png](submit-command.png)
+![subscribe-event.png](subscribe-event.png)
 
 Fill in the values for all input fields and submit.
 
@@ -117,4 +123,6 @@ command : sleep
 sleep : 2
 ```
 
-That's all for adding an Submit command feature!!!
+That's all we needed to do for adding an Submit command feature!!!
+
+* Follow the tutorial @ref:[here](./subscribe-event.md) to add an Subscribe Event Example.

@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth'
 import { Login } from './Login'
 //#auth
 import { SubmitCommand } from './SubmitCommand'
+// #subscribe-event
 import { SubscribeEvent } from './SubscribeEvent'
 // #auth
 //#submit-command
@@ -29,6 +30,7 @@ export const Main = (): JSX.Element => {
     <Login />
   )
 }
+//#subscribe-event
 // #submit-command
 
 // added for paradox
@@ -48,7 +50,7 @@ export const Main2 = (): JSX.Element => {
       Hello world
     </div>
   ) : (
-    <Login /> //<-- By adding this component, redirects user to keycloak page when he is not logged in.
+    <Login /> // <- add this line
   )
 }
 // #auth

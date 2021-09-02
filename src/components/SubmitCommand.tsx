@@ -99,7 +99,6 @@ export const SubmitCommand = ({
   }
 
   //#submit-command
-  if (auth === undefined) return <div>...loading</div>
   //#submit-action
   return (
     // #submit-command-form

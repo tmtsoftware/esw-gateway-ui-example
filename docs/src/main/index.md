@@ -29,8 +29,7 @@ If at any point in time you want to see the completed tutorial, you can view the
 
 - @ref:[Creating a UI Application](flows/base-flow.md)
 - @ref:[Adding Submit Command Example](flows/submit-commands.md)
-
-<!-- - @ref:[Adding Subscribe Event Example](flows/db-flow.md)
-- @ref:[Using Paradox Documentation](flows/docs-flow.md) -->
+- @ref:[Adding Subscribe Event Example](flows/subscribe-event.md)
+- @ref:[Using Paradox Documentation](flows/docs-flow.md)
 
 @@@

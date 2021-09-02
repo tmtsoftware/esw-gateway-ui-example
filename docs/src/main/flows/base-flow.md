@@ -131,3 +131,8 @@ Now, we can make use of Auth data to send request on the protected route of Gate
 We can get rid of the unwanted css generated from the template:
 
 * Go to the `components` folder in `src` and delete `Main.module.css` file under this directory
+
+### Next Steps
+
+* Follow the tutorial @ref:[here](./submit-commands.md) to add an Submit Command Example.
+* Follow the tutorial @ref:[here](./subscribe-event.md) to add an Subscribe Event Example.
