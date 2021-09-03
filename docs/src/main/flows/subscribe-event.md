@@ -3,7 +3,7 @@
 In this use case, we want to Subscribe to an event which will be published by an Backend Component.
 We will be using EventService to publish a SystemEvent(counterEvent) every 2 seconds inside esw-shell utility.
 
-Visit [here](https://tmtsoftware.github.io/csw/0.1.0-SNAPSHOT/params/events.html) to learn more about events.
+Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/params/events.html) to learn more about events.
 
 ## Add Subscribe Event Component
 
@@ -15,7 +15,7 @@ SubscribeEvent component looks like following:
 
 @@@note
 You can refer the source code of the completed application at any point in the course of this tutorial.
-You can find it [here](https:github.com/tmtsoftware/esw-ui-example)
+You can find it [here](https:github.com/tmtsoftware/esw-gateway-ui-example)
 @@@
 
 Typescript
@@ -94,7 +94,7 @@ esw-shell start
 @                 // you are inside ammonite repl now
 ```
 
-Visit [here](https://tmtsoftware.github.io/esw/0.1.0-SNAPSHOT/eswshell/esw-shell.html) to learn more about the esw-shell utility.
+Visit [here](https://tmtsoftware.github.io/esw/$esw-version$/eswshell/esw-shell.html) to learn more about the esw-shell utility.
 
 We are using eventService's defaultPublisher API to publish events.
 

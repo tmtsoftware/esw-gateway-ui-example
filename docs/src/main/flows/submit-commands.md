@@ -2,9 +2,9 @@
 
 In this use case, we want to send a command (Setup/Observe) to an Assembly/HCD from the UI application via Gateway server.
 
-Visit [here](https://tmtsoftware.github.io/csw/0.1.0-SNAPSHOT/params/commands.html) to learn more about commands.
+Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/params/commands.html) to learn more about commands.
 
-Visit [here](https://tmtsoftware.github.io/csw/0.1.0-SNAPSHOT/commons/create-component.html) to learn more about Assembly / HCD components.
+Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/commons/create-component.html) to learn more about Assembly / HCD components.
 
 ## Start an Assembly using esw-shell
 
@@ -18,9 +18,9 @@ esw-shell start
 @                 // you are inside ammonite repl now
 ```
 
-Visit [here](https://tmtsoftware.github.io/esw/0.1.0-SNAPSHOT/eswshell/esw-shell.html) to learn more about the esw-shell utility.
+Visit [here](https://tmtsoftware.github.io/esw/$esw-version$/eswshell/esw-shell.html) to learn more about the esw-shell utility.
 
-we are using [this](https://tmtsoftware.github.io/esw/0.1.0-SNAPSHOT/eswshell/esw-shell.html#using-custom-component-handlers) API to start our assembly with our custom handlers.
+we are using [this](https://tmtsoftware.github.io/esw/$esw-version$/eswshell/esw-shell.html#using-custom-component-handlers) API to start our assembly with our custom handlers.
 
 This assembly takes `sleep` command with `sleepInSeconds` (LongKey) parameter and returns `Started Response` immediately and then `Completed response` after the given sleep value.
 Any other command other than `sleep` returns Completed Response.
@@ -60,7 +60,7 @@ SubmitCommand.tsx looks like following:
 
 @@@note
 You can refer the source code of the completed application at any point in the course of this tutorial.
-You can find it @link:[here](https:github.com/tmtsoftware/esw-ui-example)
+You can find it @link:[here](https:github.com/tmtsoftware/esw-gateway-ui-example)
 @@@
 
 Typescript

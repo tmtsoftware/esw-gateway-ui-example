@@ -118,9 +118,9 @@ npm start
 You should be getting redirected to keycloak login page.
 Try logging in with one of predefined users in csw-services.
 
-Visit [here](https://tmtsoftware.github.io/csw/0.1.0-SNAPSHOT/apps/cswservices.html#predefined-users-) to find the predefined users.
+Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/apps/cswservices.html#predefined-users-) to find the predefined users.
 
-Visit [here](https://tmtsoftware.github.io/esw/0.1.0-SNAPSHOT/uisupport/gateway.html) to know more about users & the roles.
+Visit [here](https://tmtsoftware.github.io/esw/$esw-version$/uisupport/gateway.html) to know more about users & the roles.
 
 Once you are logged in, you would be greeted again with `Hello world`.
 

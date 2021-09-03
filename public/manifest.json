@@ -1,6 +1,6 @@
 {
-  "short_name": "esw-ui-example",
-  "name": "esw-ui-example",
+  "short_name": "esw-gateway-ui-example",
+  "name": "esw-gateway-ui-example",
   "start_url": "./index.html",
   "display": "standalone"
 }

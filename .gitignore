@@ -13,6 +13,8 @@ yarn.lock
 .DS_Store
 target
 **/web_modules/*
-.metals
+**/.metals
+**/metals.sbt
+**/.bloop/*
 .log
 .bsp

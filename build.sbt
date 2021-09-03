@@ -4,8 +4,16 @@ import org.tmt.sbt.docs.Settings
 ThisBuild / scalaVersion := "2.13.6"
 ThisBuild / organizationName := "TMT Org"
 ThisBuild / docsRepo := "https://github.com/tmtsoftware/tmtsoftware.github.io.git"
-ThisBuild / docsParentDir := "esw-ui-example"
-ThisBuild / gitCurrentRepo := "https://github.com/tmtsoftware/esw-ui-example"
+ThisBuild / docsParentDir := "esw-gateway-ui-example"
+ThisBuild / gitCurrentRepo := "https://github.com/tmtsoftware/esw-gateway-ui-example"
+
+lazy val CSW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
+  case "true" => "4.0.0-RC1"
+}
+
+lazy val ESW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
+  case "true" => "0.3.0-RC1"
+}
 
 lazy val openSite =
   Def.setting {
@@ -18,7 +26,7 @@ lazy val openSite =
   }
 
 /* ================= Root Project ============== */
-lazy val `esw-ui-example` = project
+lazy val `esw-gateway-ui-example` = project
   .in(file("."))
   .enablePlugins(GithubPublishPlugin)
   .aggregate(docs)
@@ -35,5 +43,10 @@ lazy val docs = project
         case Some("true") => version.value
         case _            => "0.1.0-SNAPSHOT"
       }
-    }
+    },
+    paradoxProperties ++= Map(
+      "esw-version"             -> ESW_VERSION.getOrElse("0.1.0-SNAPSHOT"),
+      "csw-version"             -> CSW_VERSION.getOrElse("0.1.0-SNAPSHOT")
+    )
   )
+
