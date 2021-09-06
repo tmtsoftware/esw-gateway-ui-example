@@ -1,4 +1,4 @@
-# ESW UI Application Tutorial
+# ESW Gateway UI Application Tutorial
 
 In the ESW user interface design, a Gateway-UI template is used when the user interface has to make use of the interfaces of the control system provided by the User Interface Gateway. For instance, a UI application should be used if Services behind Gateway server needs to be accessed.
 
@@ -26,7 +26,7 @@ The application created in this tutorial has 2 example features.
 The tutorial has been divided into 3 main flows that incrementally demonstrate the addition of both the above 2 features using the interfaces of
 Gateway server.
 
-The basic flow in "Creating a UI Application" will show you how to add a route to the backend application and consume them in your frontend.
+The basic flow in "Creating Gateway UI Application" will show you how to add a route to the backend application and consume them in your frontend.
 The flows following the basic flow are incremental steps to make the application more complete.
 
 If at any point in time you want to see the completed tutorial, you can view the final code [here](https://github.com/tmtsoftware/esw-gateway-ui-example).
@@ -34,7 +34,7 @@ If at any point in time you want to see the completed tutorial, you can view the
 @@toc { depth=1 }
 @@@ index
 
-- @ref:[Creating a UI Application](flows/base-flow.md)
+- @ref:[Creating Gateway UI Application](flows/base-flow.md)
 - @ref:[Adding Submit Command Example](flows/submit-commands.md)
 - @ref:[Adding Subscribe Event Example](flows/subscribe-event.md)
 - @ref:[Using Paradox Documentation](flows/docs-flow.md)

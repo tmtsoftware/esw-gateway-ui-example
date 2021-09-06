@@ -1,4 +1,4 @@
-# Creating a Web Application
+# Creating Gateway UI Application
 
 This flow demonstrates how to use the template to create our project, how to add UI components for adding particular features,
 and how to build and test it.
