@@ -50,7 +50,7 @@ export const Main2 = (): JSX.Element => {
       Hello world
     </div>
   ) : (
-    <Login /> // <- add this line
+    <Login />
   )
 }
 // #auth

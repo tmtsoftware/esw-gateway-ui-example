@@ -61,6 +61,8 @@ We need the user to login via keycloak's login page. So we need to have a way to
 hence, Add the `Login.tsx` in components folder which will redirect the user to keycloak's login page.
 Later we will use this `Login` Component in `Main.tsx`.
 
+Copy the full snippet shown below & paste it in Login.tsx
+
 Typescript
 : @@snip [Login.tsx](../../../../src/components/Login.tsx) { #login-page }
 
@@ -68,10 +70,14 @@ Typescript
 
 First lets wrap our Main application with `AuthContextProvider` from `esw-ts` in `App.tsx` as shown below
 
+Copy the snippet within `return` statement from the following & update `App.tsx`.
+
 Typescript
 : @@snip [App.tsx](../../../../src/App.tsx) { #auth-context }
 
 Now, lets update the `Main.tsx` component in our frontend UI to have login functionality.
+
+Copy the full snippet shown below in `Main.tsx`.
 
 Typescript
 : @@snip [Main.tsx](../../../../src/components/Main.tsx) { #auth }
@@ -99,7 +105,7 @@ csw-services start -k -c -e
 Start Gateway Service using esw-services.
 
 ```bash
-cs install esw-services:0.3.0-RC1
+cs install esw-services:97b32bc3
 esw-services start -g
 
 ```

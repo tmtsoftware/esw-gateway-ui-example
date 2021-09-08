@@ -13,7 +13,7 @@ Before moving ahead, if you have not started backend services. Then let's start 
 Now, lets setup an assembly using esw-shell utility. It starts an ammonite repl with basic api's for us to orchestrate the backend services.
 
 ```bash
-cs install esw-shell:0.3.0-RC1
+cs install esw-shell:97b32bc3
 esw-shell start 
 @                 // you are inside ammonite repl now
 ```
@@ -71,7 +71,7 @@ Add appropriate imports to the file.
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command-imports }
 
-Let's add the Form component's for the input fields.
+Let's add the Form component's for the input fields inside `<Card>` component.
 
 * CommandType - A Selectable with Options(Setup/Observe)
 * ComponentType - A Selectable with Options(Assembly/HCD)
@@ -85,12 +85,16 @@ Typescript
 
 Add the following react states to hold the information of their corresponding user inputs.
 
+The following snippet goes below `authData` state inside component.
+
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command-states }
 
 Now finally, add the `submit` action to be called on Submit button click(i.e. `onFinish` handle of Form component)
 
 This method makes use of [command service](https://tmtsoftware.github.io/esw-ts/services/command-service.html) typescript client which sits on top of the gateway server Command Service routes.
+
+Define this function adjacent to all the react state's inside component.
 
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-action }
@@ -99,7 +103,7 @@ Typescript
 
 Add this helper function to render color corresponding to the SubmitResponse's type.
 
-Tip: this function can be defined outside component because it is independent of any component state.
+This function goes outside the component because it is independent of react component's state.
 
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #color-helper }
@@ -107,6 +111,8 @@ Typescript
 ## Integrate SubmitCommand Component
 
 Finally, update Main.tsx to include `SubmitCommand` component.
+
+Add the following `<SubmitCommand />` component below div's style tag.
 
 Typescript
 : @@snip [Main.tsx](../../../../src/components/Main.tsx) { #submit-command }

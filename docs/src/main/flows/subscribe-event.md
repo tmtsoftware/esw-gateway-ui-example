@@ -28,12 +28,14 @@ This Form includes two input fields
 * Event KeyName - A free text input box for putting Event's keyname of the desired subscription.
 * Subscribe - A button for creating subscription. It gets toggled to `UnSubscribe` on success.
 
-Add the following in the SubscribeEvent component
+Add the following in the SubscribeEvent component inside `<Card>` component.
 
 Typescript
 : @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-fields }
 
 Add the following react states to hold the information of their corresponding user inputs.
+
+Add the following snippet in the SubscribeEvent component below `authData` react state.
 
 Typescript
 : @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-state }
@@ -42,6 +44,8 @@ Now, lets add subscribe method which gets called `onFinish` of the form componen
 
 This method makes use of [event service](https://tmtsoftware.github.io/esw-ts/services/event-service.html) typescript client which sits on top of the gateway server EventServer routes.
 In this method, We call `subscribe` api of eventService to create subscription in a callback based fashion. the callback named `handleEvent` gets triggered when ever an event is recieved on that subscription.
+
+Define this function adjacent to all the react state's inside component.
 
 Typescript
 : @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-subcription }
@@ -64,6 +68,8 @@ Typescript
 
 Finally, update Main.tsx to include `SubscribeEvent` component.
 
+Add the following `<SubscribeEvent />` adjacent to `<SubmitCommand />` component inside `<div>`.
+
 Typescript
 : @@snip [Main.tsx](../../../../src/components/Main.tsx) { #subscribe-event }
 
@@ -80,7 +86,7 @@ Event KeyName : counterEvent
 
 That's all we needed to do for adding an Subscribe Event feature!!!
 
-Not, let's simulate an backend publishing some events and see them reflecting on UI in real-time.
+Now, let's simulate an backend publishing some events and see them reflecting on UI in real-time.
 
 ## Publish events using esw-shell
 
@@ -89,7 +95,7 @@ Before moving ahead, if you have not started backend services. Then let's start 
 Now, lets start esw-shell utility. It starts an ammonite repl with basic api's for us to publish events.
 
 ```bash
-cs install esw-shell:0.3.0-RC1
+cs install esw-shell:97b32bc3
 esw-shell start 
 @                 // you are inside ammonite repl now
 ```
