@@ -8,7 +8,7 @@ Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/commons/create-comp
 
 ## Start an Assembly using esw-shell
 
-Before moving ahead, if you have not started backend services. Then let's start backend services by following @ref:[this](./base-flow.md){#starting-backend-services} steps.
+Before moving ahead, if you have not started backend services. Then let's start backend services by following @ref:[this](./base-flow.md#starting-backend-services) steps.
 
 Now, lets setup an assembly using esw-shell utility. It starts an ammonite repl with basic api's for us to orchestrate the backend services.
 
@@ -60,7 +60,7 @@ SubmitCommand.tsx looks like following:
 
 @@@note
 You can refer the source code of the completed application at any point in the course of this tutorial.
-You can find it @link:[here](https:github.com/tmtsoftware/esw-gateway-ui-example)
+You can find it @link:[here](https://github.com/tmtsoftware/esw-gateway-ui-example)
 @@@
 
 Typescript
@@ -113,7 +113,7 @@ Typescript
 
 UI should render the following view at this moment.
 
-![subscribe-event.png](subscribe-event.png)
+![submit-command.png](submit-command.png)
 
 Fill in the values for all input fields and submit.
 

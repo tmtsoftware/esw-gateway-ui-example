@@ -48,12 +48,7 @@ Then browsing to the UI directory, open the `sample` project.  It should have a 
 
 ## Create the Frontend
 
-In this section, we will be constructing a browser-based UI using React components in Typescript.  We will create
-components that allow the user to specify various inputs in a form (e.g Setup/Observe command to be sent an Assembly or an HCD via `select` html tags),
-and then the a Submit button that will send the data to our
-backend.  The response will then be rendered in UI components. We will also provide components to get and display the
-list of stored coordinates.  This section of the tutorial will show how to add and render custom components within the
-application that act as clients to consume our gateway backend routes.
+In this section, we will be constructing a browser-based UI using React components in Typescript. We will create components that allow the user to specify various inputs in a form (e.g Setup/Observe command to be sent an Assembly or an HCD via `select` html tags), and then the a Submit button that will send the data to our backend. The response will then be rendered in UI components. This section of the tutorial will show how to add and render custom components within the application that act as clients to consume our gateway backend routes.
 
 @@@ note
 The frontend tutorial uses functionality from the ESW-TS library.  Be sure and look at the documentation for ESW-TS once

@@ -15,7 +15,7 @@ SubscribeEvent component looks like following:
 
 @@@note
 You can refer the source code of the completed application at any point in the course of this tutorial.
-You can find it [here](https:github.com/tmtsoftware/esw-gateway-ui-example)
+You can find it [here](https://github.com/tmtsoftware/esw-gateway-ui-example)
 @@@
 
 Typescript
@@ -69,7 +69,7 @@ Typescript
 
 UI should render the following view at this moment.
 
-![submit-command.png](subscribe-event.png)
+![subscribe-event.png](subscribe-event.png)
 
 Fill in the values for all input fields and subscribe.
 
@@ -99,7 +99,7 @@ Visit [here](https://tmtsoftware.github.io/esw/$esw-version$/eswshell/esw-shell.
 We are using eventService's defaultPublisher API to publish events.
 
 ```scala
-@ val counter = 0
+@ var counter = 0
 @ def eventGenerator = Option{
     counter+=1
     SystemEvent(Prefix("ESW.assembly123"), EventName("counterEvent"), Set(IntKey.make("counter").set(counter)))
