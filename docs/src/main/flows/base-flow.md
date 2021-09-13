@@ -12,7 +12,7 @@ do this, we will delete much of the template code and rewrite our own components
 First we need to generate a scaffolding application using our giter8 template:
 
 ```bash
-g8 tmtsoftware/esw-ui-template.g8 --name=sample
+g8 tmtsoftware/esw-gateway-ui-template.g8 --project_name=sample
 ```
 
 This will generate a sample folder with `docs` and `src` folders.  For a sanity check, let's go ahead and
