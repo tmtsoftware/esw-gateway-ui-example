@@ -177,8 +177,8 @@ export const SubmitCommand = ({
           </Badge.Ribbon>
         )}
       </Typography.Paragraph>
-      {/* // #submit-command-form */}
     </Card>
+    // #submit-command-form */
   )
 }
 //#submit-command
