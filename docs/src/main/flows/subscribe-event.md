@@ -75,7 +75,7 @@ Typescript
 
 UI should render the following view at this moment.
 
-![subscribe-event.png](subscribe-event.png)
+![subscribe-event.png](../images/subscribe-event.png)
 
 Fill in the values for all input fields and subscribe.
 
@@ -114,3 +114,7 @@ We are using eventService's defaultPublisher API to publish events.
 ```
 
 This should start publishing events every 2 seconds from the source prefix `ESW.assembly123`.
+
+UI should now start showing events
+
+![events](../images/events.png)

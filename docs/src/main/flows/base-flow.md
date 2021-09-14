@@ -29,8 +29,12 @@ Make sure node version `v16.0.0` or higher is installed in your machine. Let's c
 ```bash
 cd sample
 npm install
-npm run build
+npm start
 ```
+
+You would be greeted with the following screen.
+
+![hello-world](../images/hello-world.png)
 
 @@@ note
 This tutorial uses the current ESW.UISTD selections for user interface languages, libraries, and tools. These are the current selections.
@@ -91,6 +95,8 @@ npm start
 you must be getting `Loading...` on the browser screen.
 Because, The UI is now trying to find the Auth server & we have not yet started any of the required backend services.
 
+![login](../images/login.png)
+
 Let's start the required backend services along with Auth server for further use cases.
 
 ## Starting backend services
@@ -117,6 +123,9 @@ npm start
 ```
 
 You should be getting redirected to keycloak login page.
+
+![user-login](../images/user-login.png)
+
 Try logging in with one of predefined users in csw-services.
 
 Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/apps/cswservices.html#predefined-users-) to find the predefined users.

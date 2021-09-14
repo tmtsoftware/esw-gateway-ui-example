@@ -1,5 +1,9 @@
 // #auth-context
-import { AuthContextProvider, LocationService } from '@tmtsoftware/esw-ts'
+import {
+  AuthContextProvider,
+  LocationService,
+  loadGlobalConfig
+} from '@tmtsoftware/esw-ts'
 // #auth-context
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -14,14 +18,15 @@ const basename =
 const App = (): JSX.Element => {
   // ..
   // ..
+  const { error, data: initialised } = useQuery(() =>
+    loadGlobalConfig().then(() => true)
+  )
   //#auth-context
-  const { data: locationService, loading, error } = useQuery(LocationService)
+  const locationService = LocationService()
 
-  if (loading) return <div>Loading...</div>
-  if (error || !locationService)
-    return <div>Location Service not Available, reason {error?.message}</div>
+  if (error) return <div> Failed to load global config </div>
   //#auth-context
-  return (
+  return initialised ? (
     <div>
       <LocationServiceProvider locationService={locationService}>
         <Router basename={basename}>
@@ -31,6 +36,8 @@ const App = (): JSX.Element => {
         </Router>
       </LocationServiceProvider>
     </div>
+  ) : (
+    <div>Loading...</div>
   )
 }
 //#auth-context

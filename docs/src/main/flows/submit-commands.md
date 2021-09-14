@@ -71,7 +71,7 @@ Add appropriate imports to the file.
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command-imports }
 
-Let's add the Form component's for the input fields inside `<Card>` component.
+Let's add the Form component's for the input fields within `<Card>{below code goes here}</Card>` component.
 
 * CommandType - A Selectable with Options(Setup/Observe)
 * ComponentType - A Selectable with Options(Assembly/HCD)
@@ -119,9 +119,11 @@ Typescript
 
 UI should render the following view at this moment.
 
-![submit-command.png](submit-command.png)
+![submit-command.png](../images/submit-command.png)
 
 Fill in the values for all input fields and submit.
+
+That's all we needed to do for adding an Submit command feature!!!
 
 ```text
 prefix : ESW.defaultAssembly
@@ -129,6 +131,14 @@ command : sleep
 sleep : 2
 ```
 
-That's all we needed to do for adding an Submit command feature!!!
+The UI should be updated with the following results.
+
+First UI recieves started resposne.
+
+![started](../images/started.png)
+
+And after 2 seconds `Completed` response is received.
+
+![completed](../images/Completed.png)
 
 * Follow the tutorial @ref:[here](./subscribe-event.md) to add Subscribe Event Example.
