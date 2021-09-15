@@ -13,7 +13,7 @@ Before moving ahead, if you have not started backend services. Then let's start 
 Now, lets setup an assembly using esw-shell utility. It starts an ammonite repl with basic api's for us to orchestrate the backend services.
 
 ```bash
-cs install esw-shell:97b32bc3
+cs install esw-shell
 esw-shell start 
 @                 // you are inside ammonite repl now
 ```

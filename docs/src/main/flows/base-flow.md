@@ -104,14 +104,14 @@ Let's start the required backend services along with Auth server for further use
 Start the Location Service with the Authorization and Authentication Service, Config Service & Event Service(we will use event service in the next section of the tutorial).
 
 ```bash
-cs install csw-services:v4.0.0-RC1
+cs install csw-services
 csw-services start -k -c -e
 ```
 
 Start Gateway Service using esw-services.
 
 ```bash
-cs install esw-services:97b32bc3
+cs install esw-services
 esw-services start -g
 
 ```
