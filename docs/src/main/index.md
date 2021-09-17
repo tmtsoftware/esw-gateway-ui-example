@@ -1,33 +1,39 @@
-# ESW Gateway UI Application Tutorial
+# Gateway UI Application Tutorial
 
-In the ESW user interface design, a Gateway-UI template is used when the user interface has to make use of the interfaces of the control system provided by the User Interface Gateway. For instance, a UI application should be used if Services behind Gateway server needs to be accessed.
+For TMT, many highly functional user interfaces can be written that do not require their own backend logic; that is,
+while running, they only need to access existing HTTP services, such as CSW Services like the Location Service and 
+the Configuration Service, and the ESW UI Gateway, which provides HTTP access to components and other CSW Services.
 
-Services which are behind the Gateway server are among these :
+The services which are provided by the UI Gateway include:
 
-- Command Service
-- Sequencer Service
+- Command Service (sending commands to Assemblies and HCDs)
+- Sequencer Service (sending sequences to a Sequencer)
 - Event Service
 - Alarm Service
 - Admin Service
 - Logger Service
 
-Creating a UI application is not trivial and requires the programmer to understand several technologies as well as the ESW authentication and authorization system. Therefore, it is recommended that this approach be taken only when necessary.
+These applications are called "Gateway UI Apps" and are contrasted with "Web Apps", which in our context implies custom
+backend logic.  Despite the name, Gateway UI Apps may interact with other existing HTTP services along with the 
+UI Gateway.  The distinction is that is does not require its own HTTP service to operate, other that something
+to serve the pages.  In fact, the ESW Gateway UI [template](https://github.com/tmtsoftware/esw-gateway-ui-template.g8) 
+can be used to create UI apps that do not use the Gateway, although that is the intention, as the template will set up 
+the necessary wiring for it.
 
 ## Tutorial Welcome
 
-This tutorial uses a set of smaller tutorials to create a UI Application using the ESW Gateway UI [template](https://github.com/tmtsoftware/esw-gateway-ui-template.g8).
-This template is meant to be used when developers want to create application's which talks with gateway server only.
-
+This tutorial uses a set of smaller tutorials to create a UI Application using the ESW Gateway UI template.
 The application created in this tutorial has 2 example features.
 
-1. Submmiting a command to an assembly/HCD by giving appropriate values in the UI form.
-2. Subscribing to an event and display the event's content on the UI as soon as the event is received.
+1. Creating a command in the UI using a form, and submitting the command to an assembly/HCD.
+2. Subscribing to an event and displaying the event content on the UI when the event is received.
 
-The tutorial has been divided into 3 main flows that incrementally demonstrate the addition of both the above 2 features using the interfaces of
-Gateway server.
+The tutorial has been divided into 3 main flows. First, you will create the application using the tutorial, set up
+a simple login component, and run the bare-bones version of the app.  Next, the form for creating a command is added,
+and you will learn how to send the command to a component through the gateway.  Lastly, it will be demonstrated how
+to subscribe to an Event via the Gateway and display the result in the UI.  
 
-The basic flow in "Creating Gateway UI Application" will show you how to add a route to the backend application and consume them in your frontend.
-The flows following the basic flow are incremental steps to make the application more complete.
+An additional flow is provided to show how to add documentation to your UI.
 
 If at any point in time you want to see the completed tutorial, you can view the final code [here](https://github.com/tmtsoftware/esw-gateway-ui-example).
 

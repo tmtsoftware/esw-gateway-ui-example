@@ -1,7 +1,9 @@
 # Adding Paradox Documentation
 
-The section of the tutorial describes how to write documentation for your application using [paradox](https://developer.lightbend.com/docs/paradox/current/getting-started.html).
-Documentation is written in GitHub-flavored markdown, which is documented [here](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax.)
+The section of the tutorial describes how to write documentation for your application 
+using [paradox](https://developer.lightbend.com/docs/paradox/current/getting-started.html).
+Documentation is written in GitHub-flavored markdown, which is 
+documented [here](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax.)
 
 ## Pre-requisite
 
@@ -22,7 +24,7 @@ sbt:sample> makeSite
 sbt:sample> openSite
 ```
 
-You can modify the various `.md` files present in `docs` folder and repeat above steps and verify your generated
+You can modify the various `.md` files present in `docs` folder and repeat the steps above and verify your generated
 documentation.  Refer to the Paradox documentation to learn more about the documentation system.
 
 ## Documentation Publish Flow

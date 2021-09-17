@@ -3,10 +3,6 @@
 This flow demonstrates how to use the template to create our project, how to add UI components for adding particular features,
 and how to build and test it.
 
-In this tutorial, we will first generate the application from the template, and build it to ensure tools are in place.
-Then, we will delete the default implementation and replace it with our own implementation of a `Submit command to an assembly` & `Subscribe to an event` UI component. To
-do this, we will delete much of the template code and rewrite our own components custom to our implementation.
-
 ## Generate Application
 
 First we need to generate a scaffolding application using our giter8 template:
@@ -17,9 +13,6 @@ g8 tmtsoftware/esw-gateway-ui-template.g8 --project_name=sample
 
 This will generate a sample folder with `docs` and `src` folders.  For a sanity check, let's go ahead and
 build the frontend created by the template.  This will also help ensure you have the necessary tools installed.
-
-You are welcome to try out the generated sample project, which is basically a "Hello World" application, by following
-the  instructions in the READMEs in each sub-folder.
 
 ### Compile the Frontend
 
@@ -32,38 +25,39 @@ npm install
 npm start
 ```
 
-You would be greeted with the following screen.
+You will be greeted with the following screen.
 
 ![hello-world](../images/hello-world.png)
 
 @@@ note
-This tutorial uses the current ESW.UISTD selections for user interface languages, libraries, and tools. These are the current selections.
-They will be reviewed and updated once again as part of ESW Phase 2.
+This tutorial uses the current ESW.UISTD selections for user interface languages, libraries, and tools. These selections
+will be reviewed and updated once again as part of ESW Phase 2.
 @@@
 
 ## Open in Development Environment
 
 At this point, you may want to open the project in an Integrated Development Environment (IDE), such as Intellij,
-if you are using one.  The template creates a Typescript/npm-based frontend. We recommend VS Code or Intellij for the frontend applications.
+if you are using one.  The template creates a Typescript/npm-based frontend. We recommend VS Code or Intellij.
 
-To open the UI project in VS Code, click on `File->Open` Or To open the UI project in Intellij, click on `File->New Project from Existing Sources`
+To open the UI project in VS Code, click on `File->Open`. To open the UI project in Intellij, click on `File->New Project from Existing Sources`
 
-Then browsing to the UI directory, open the `sample` project.  It should have a package.json file in it.
+Then browse to the UI directory, open the `sample` project.  It should have a package.json file in it.
 
-## Create the Frontend
+## Create the UI
 
-In this section, we will be constructing a browser-based UI using React components in Typescript. We will create components that allow the user to specify various inputs in a form (e.g Setup/Observe command to be sent an Assembly or an HCD via `select` html tags), and then the a Submit button that will send the data to our backend. The response will then be rendered in UI components. This section of the tutorial will show how to add and render custom components within the application that act as clients to consume our gateway backend routes.
+In this section, we will begin constructing our browser-based UI using React components in Typescript. We will start by
+adding a login component.
 
 @@@ note
-The frontend tutorial uses functionality from the ESW-TS library.  Be sure and look at the documentation for ESW-TS once
-you start working on your own UI.  ESW-TS documentation can be found [here](http://tmtsoftware.github.io/esw-ts).
+The frontend tutorial uses functionality from the ESW-TS library.  The documentation for ESW-TS can be useful when
+building your UI.  ESW-TS documentation can be found [here](http://tmtsoftware.github.io/esw-ts).
 @@@
 
 ### Create login component
 
-We need the user to login via keycloak's login page. So we need to have a way to redirect the user.
-hence, Add the `Login.tsx` in components folder which will redirect the user to keycloak's login page.
-Later we will use this `Login` Component in `Main.tsx`.
+Use of the TMT Command Service via the UI Gateway requires authentication.  The user must login via the TMT AAS login 
+page, so we will add a login component from the ESW-TS library.  Create a `Login.tsx` file in the `src/components` folder 
+which will redirect the user to the TMT login page. Later we will use this `Login` Component in `Main.tsx`.
 
 Copy the full snippet shown below & paste it in Login.tsx
 
@@ -72,19 +66,26 @@ Typescript
 
 ### Update Main & App component with authentication
 
-First lets wrap our Main application with `AuthContextProvider` from `esw-ts` in `App.tsx` as shown below
+First, add the component to our UI by updating the `Main.tsx` component in `/src/components`.
 
-Copy the snippet within `return` statement from the following & update `App.tsx`.
-
-Typescript
-: @@snip [App.tsx](../../../../src/App.tsx) { #auth-context }
-
-Now, lets update the `Main.tsx` component in our frontend UI to have login functionality.
-
-Copy the full snippet shown below in `Main.tsx`.
+Copy the full snippet shown below and replace the contents in `Main.tsx`.
 
 Typescript
 : @@snip [Main.tsx](../../../../src/components/Main.tsx) { #auth }
+
+Here, you will see that there is a check to see if the user is authenticated, and if not, the login component will be 
+shown.  If the user is authenticated, the normal functionality of the app is presented, which right now, is just the
+Hello World page.
+
+In order for our main component to have access to authentication logic from ESW-TS, we need to add a 
+[context provider](https://reactjs.org/docs/context.html) to the component.  We do this when the component is constructed
+at the top level.  We will wrap our Main application with `AuthContextProvider` from `esw-ts` in `App.tsx` 
+as shown below
+
+Copy the snippet within the `return` statement from the following & update `App.tsx`.
+
+Typescript
+: @@snip [App.tsx](../../../../src/App.tsx) { #auth-context }
 
 After adding this section, run the following command to see the progress that we made till now.
 
@@ -92,23 +93,23 @@ After adding this section, run the following command to see the progress that we
 npm start
 ```
 
-you must be getting `Loading...` on the browser screen.
-Because, The UI is now trying to find the Auth server & we have not yet started any of the required backend services.
+You should now see `Loading...` on the browser screen.  
 
 ![login](../images/login.png)
 
-Let's start the required backend services along with Auth server for further use cases.
+This is because the UI is now trying to find the AAS authorization server, but we have not yet started CSW services.
+We will start them now, as well as the UI Gateway which will be needed for our subsequent flows.
 
 ## Starting backend services
 
-Start the Location Service with the Authorization and Authentication Service, Config Service & Event Service(we will use event service in the next section of the tutorial).
+Start the Location Service with the Authorization and Authentication Service, Config Service & the Event Service.
 
 ```bash
 cs install csw-services
 csw-services start -k -c -e
 ```
 
-Start Gateway Service using esw-services.
+Start the UI Gateway Service using esw-services.
 
 ```bash
 cs install esw-services
@@ -116,7 +117,8 @@ esw-services start -g
 
 ```
 
-Try reloading the front end in browser,
+Now try reloading the front end in browser.  If the page is still up, refresh the page.  If you closed it, restart the 
+server using:
 
 ```bash
 npm start
@@ -134,15 +136,15 @@ Visit [here](https://tmtsoftware.github.io/esw/$esw-version$/uisupport/gateway.h
 
 Once you are logged in, you would be greeted again with `Hello world`.
 
-Now, we can make use of Auth data to send request on the protected route of Gateway server.
+Now, we can make use of authorization data to send a request to a protected route of the Gateway server.
 
 ### Cleanup
 
 We can get rid of the unwanted css generated from the template:
 
-* Go to the `components` folder in `src` and delete `Main.module.css` file under this directory
+* Go to the `components` folder in `src` and delete `Main.module.css` file in this directory
 
 ### Next Steps
 
-* Follow the tutorial @ref:[here](./submit-commands.md) to add Submit Command Example.
-* Follow the tutorial @ref:[here](./subscribe-event.md) to add Subscribe Event Example.
+* Follow the tutorial @ref:[here](./submit-commands.md) to add the Submit Command functionality.
+* Follow the tutorial @ref:[here](./subscribe-event.md) to add the Subscribe Event functionality.

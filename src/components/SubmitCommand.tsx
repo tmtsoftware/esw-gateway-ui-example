@@ -1,4 +1,4 @@
-//#submit-command-imports
+//#submit-command
 import {
   CommandService,
   ComponentId,
@@ -22,7 +22,6 @@ import {
 import type { PresetColorType } from 'antd/lib/_util/colors'
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
-//#submit-command-imports
 
 //#color-helper
 const getResultType = (
@@ -41,8 +40,6 @@ const getResultType = (
 }
 //#color-helper
 
-//#submit-command
-// #submit-command-states
 export const SubmitCommand = ({
   _commandService
 }: {
@@ -50,19 +47,19 @@ export const SubmitCommand = ({
 }): JSX.Element => {
   const { auth } = useAuth()
   const authData = { tokenFactory: () => auth?.token() }
-  //#submit-command
 
+  // #submit-command-states
   const [prefix, setPrefix] = useState<string>('')
   const [command, setCommand] = useState<string>('')
   const [sleepTime, setSleepTime] = useState<number>()
   const [result, setResult] = useState<SubmitResponse>()
   const [commandType, setCommandType] = useState<'Setup' | 'Observe'>('Setup')
-  //#submit-action
   const [componentType, setComponentType] = useState<'HCD' | 'Assembly'>(
     'Assembly'
   )
   // #submit-command-states
 
+  //#submit-action
   const submit = async () => {
     try {
       const sleepInMs = longKey('sleepInSeconds').set([
@@ -96,10 +93,9 @@ export const SubmitCommand = ({
       message.error((e as Error).message)
       setResult(undefined)
     }
+    //#submit-action
   }
 
-  //#submit-command
-  //#submit-action
   return (
     // #submit-command-form
     <Card
@@ -110,7 +106,6 @@ export const SubmitCommand = ({
       title={
         <Typography.Title level={2}>Submit Command Example</Typography.Title>
       }>
-      {/* //#submit-command */}
       <Form>
         <Form.Item label='Command Type' required>
           <Select
@@ -165,8 +160,8 @@ export const SubmitCommand = ({
           </Button>
         </Form.Item>
       </Form>
-      {/* //#submit-command */}
       <Divider />
+      {/* //#submit-command-result */}
       <Typography.Title level={2}>Result</Typography.Title>
       <Typography.Paragraph>
         {result && (
@@ -177,6 +172,7 @@ export const SubmitCommand = ({
           </Badge.Ribbon>
         )}
       </Typography.Paragraph>
+      {/* //#submit-command-result */}
     </Card>
     // #submit-command-form */
   )

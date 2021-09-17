@@ -1,65 +1,82 @@
-# Adding Subscribing An Event Example
+# Adding Event Subscription
 
-In this use case, we want to Subscribe to an event which will be published by an Backend Component.
-We will be using EventService to publish a SystemEvent(counterEvent) every 2 seconds inside esw-shell utility.
+In this part of the tutorial, we want to add the ability to subscribe to an Event published through the Event Service
+and display the results. We will be using the esw-shell utility to publish a SystemEvent every 2 seconds to the Event Service.
+
+This section of the app will display a form at the top to specify which event to subscribe to and a table below
+it showing a list of received values.
 
 Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/params/events.html) to learn more about events.
 
-## Add Subscribe Event Component
+## Add a Subscribe Event Component
 
-Assuming that you have followed atleast the @ref:[basic flow](./base-flow.md), we can go further and add subscribing to an event feature in our UI.
+Create a `SubscribeEvent.tsx` file in `src/components` folder.
 
-Add `SubscribeEvent.tsx` file in `src/components` folder.
-
-SubscribeEvent component looks like following:
+In this tutorial, we will build up the SubscribeEvent component gradually. 
 
 @@@note
 You can refer the source code of the completed application at any point in the course of this tutorial.
 You can find it [here](https://github.com/tmtsoftware/esw-gateway-ui-example)
 @@@
 
+Start with the following code, which defines the component, enables authorization, and creates a base Card component to
+put our other components in.  
+
 Typescript
 : @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event }
 
-We need to add form element to take input from the user.
-This Form includes two input fields
+Next, we will add a form to take input from the user.
 
-* SourcePrefix - A free text input box for putting Source Prefix of the desired subscription.
-* Event KeyName - A free text input box for putting Event's keyname of the desired subscription.
-* Subscribe - A button for creating subscription. It gets toggled to `UnSubscribe` on success.
-
-Add the following in the SubscribeEvent component inside `<Card>` component.
+Add the following in the `SubscribeEvent` component inside the `<Card>` component just below the `title` attribute.
 
 Typescript
 : @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-fields }
 
-Add the following react states to hold the information of their corresponding user inputs.
+This Form includes the following items:
 
-Add the following snippet in the SubscribeEvent component below `authData` react state.
+* SourcePrefix - A free text input box for putting Source Prefix of the desired subscription.
+* Event KeyName - A free text input box for putting Event's keyname of the desired subscription.
+* Subscribe - A button for creating subscription. It gets toggled to `UnSubscribe` on when the subscription is
+  successfully started.
+
+Next, we will add the React state hooks for storing and setting the values of these components:
+
+Add the following snippet in the SubscribeEvent component below the `authData` react state, above the return statement.
 
 Typescript
 : @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-state }
 
-Now, lets add subscribe method which gets called `onFinish` of the form component.
+The `onFinish` attribute of the form component specifies the method to be called when the form is submitted. 
+We have specified this to be the `subscribe` method.  We will implement this now. 
 
-This method makes use of [event service](https://tmtsoftware.github.io/esw-ts/services/event-service.html) typescript client which sits on top of the gateway server EventServer routes.
-In this method, We call `subscribe` api of eventService to create subscription in a callback based fashion. the callback named `handleEvent` gets triggered when ever an event is recieved on that subscription.
+This method makes use of the ESW-TS [Event Service](https://tmtsoftware.github.io/esw-ts/services/event-service.html) 
+Typescript client which provides access to the Event Service through the Event Service routes of the Gateway.
+In this method, we call the `subscribe` API of the Event Service to create a subscription using a callback. 
+The callback method `handleEvent`, defined at the top of this block, gets triggered whenever an event is received on that subscription.
 
-Define this function adjacent to all the react state's inside component.
+We also define an unsubscribe function which cancels the subscription through the ESW-TS client.
+
+Define these functions following the React state hooks inside component.
 
 Typescript
-: @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-subcription }
+: @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-subscription }
 
-Now we have fully added the functionality of susbcribing to an event. all the events received on that subscription are added to list of `events` which is a react state. we can use this `events` react state to render event however we want to show them.
+Now we have fully added the functionality of subscribing to an event.  The `events` state variable maintains a list 
+of all received events, so events received in the callback are added to this list. 
 
-In this tutorial, we will make use of Table Antd component.
+We will use an Antd Table component to display the values in the `event` state variable.
 
-Lets add this final piece to our UI component below the `Form` component to visualize the recieved events.
+First, we will define the columns in the table.  Add the following code above the return statement:
+
+Typescript
+: @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-table-columns }
+
+Add this final piece to our UI component below the `Form` component to visualize the received events.
 
 Typescript
 : @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-table }
 
-Also, Make sure to add appropriate imports to the file.
+At this point, make sure to add appropriate imports to the file.  The should look something like this:
 
 Typescript
 : @@snip [SubscribeEvent.tsx](../../../../src/components/SubscribeEvent.tsx) { #subscribe-event-imports }
@@ -68,41 +85,40 @@ Typescript
 
 Finally, update Main.tsx to include `SubscribeEvent` component.
 
-Add the following `<SubscribeEvent />` adjacent to `<SubmitCommand />` component inside `<div>`.
+Add the following `<SubscribeEvent />` immediately after the `<SubmitCommand />` component inside `<div>`.  Update imports
+as needed.
 
 Typescript
 : @@snip [Main.tsx](../../../../src/components/Main.tsx) { #subscribe-event }
 
-UI should render the following view at this moment.
+The UI should now render the following view.
 
 ![subscribe-event.png](../images/subscribe-event.png)
 
-Fill in the values for all input fields and subscribe.
+Fill in the values for the input fields and hit subscribe.
 
 ```text
 Source Prefix : ESW.assembly123
 Event KeyName : counterEvent
 ```
 
-That's all we needed to do for adding an Subscribe Event feature!!!
+You may see an Invalid Event warning the first time you run this.  This is expected because the Event has not yet been 
+published with valid data.  This can be ignored.
 
-Now, let's simulate an backend publishing some events and see them reflecting on UI in real-time.
+Now, let's simulate a component publishing some events and see them reflected in the UI in real-time.
 
 ## Publish events using esw-shell
 
-Before moving ahead, if you have not started backend services. Then let's start backend services by following @ref:[this](./base-flow.md){#Starting-backend-services} steps.
-
-Now, lets start esw-shell utility. It starts an ammonite repl with basic api's for us to publish events.
+If necessary, start the esw-shell utility.
 
 ```bash
 cs install esw-shell
 esw-shell start 
 @                 // you are inside ammonite repl now
 ```
-
 Visit [here](https://tmtsoftware.github.io/esw/$esw-version$/eswshell/esw-shell.html) to learn more about the esw-shell utility.
 
-We are using eventService's defaultPublisher API to publish events.
+We are using the Event Service `defaultPublisher` API provided in the shell to publish events.
 
 ```scala
 @ var counter = 0
@@ -115,6 +131,6 @@ We are using eventService's defaultPublisher API to publish events.
 
 This should start publishing events every 2 seconds from the source prefix `ESW.assembly123`.
 
-UI should now start showing events
+UI should now start showing events.  You may need to scroll down to see new events.
 
 ![events](../images/events.png)

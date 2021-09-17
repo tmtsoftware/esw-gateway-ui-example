@@ -22,9 +22,6 @@ import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 // #subscribe-event-imports
 // #subscribe-event
-// #subscribe-event-fields
-// #subscribe-event-state
-// #subscribe-event-table
 export const SubscribeEvent = ({
   _eventService
 }: {
@@ -32,16 +29,15 @@ export const SubscribeEvent = ({
 }): JSX.Element => {
   const { auth } = useAuth()
   const authData = { tokenFactory: () => auth?.token() }
-  // #subscribe-event-table
   // #subscribe-event
-  // #subscribe-event-fields
+  // #subscribe-event-state
   const [prefix, setPrefix] = useState('')
   const [keyName, setKeyName] = useState('')
-  // #subscribe-event-subcription
   const [events, setEvents] = useState<Event[]>([])
   const [subscription, setSubscription] = useState<Subscription>()
   // #subscribe-event-state
 
+  // #subscribe-event-subscription
   const handleEvent = (event: Event) => {
     if (event.eventId !== '-1') {
       setEvents((events) => [...events, event])
@@ -66,8 +62,8 @@ export const SubscribeEvent = ({
     )(handleEvent)
     setSubscription(subscription)
   }
-  // #subscribe-event-subcription
-  // #subscribe-event-table
+  // #subscribe-event-subscription
+  // #subscribe-event-table-columns
   const columns = [
     {
       title: 'Event Name',
@@ -83,28 +79,23 @@ export const SubscribeEvent = ({
       }
     }
   ]
-  // #subscribe-event-table
+  // #subscribe-event-table-columns
   // #subscribe-event
-  // #subscribe-event-fields
-  // #subscribe-event-state
-  // #subscribe-event-subcription
-  // #subscribe-event-table
   return (
     <Card
       style={{
         maxWidth: '30rem',
         maxHeight: '45rem'
       }}
-      // #subscribe-event-subcription
       title={
         <Typography.Title level={2}>Subscribe Event Example</Typography.Title>
       }>
       {/* // #subscribe-event */}
+      {/* // #subscribe-event-fields */}
       <Form
         onFinish={() => {
           subscription ? unSubscribe() : subscribe()
         }}>
-        {/* // #subscribe-event-table */}
         <Form.Item label='Source Prefix'>
           <Input
             role='SourcePrefix'
@@ -130,11 +121,10 @@ export const SubscribeEvent = ({
             {subscription ? 'UnSubscribe' : 'Subscribe'}
           </Button>
         </Form.Item>
-        {/* #subscribe-event-table */}
       </Form>
       {/* #subscribe-event-fields */}
-      {/* #subscribe-event-state */}
       <Divider />
+      {/* #subscribe-event-table */}
       <Table
         scroll={{ y: 240 }}
         pagination={false}
@@ -142,13 +132,9 @@ export const SubscribeEvent = ({
         dataSource={events}
         columns={columns}
       />
+      {/* #subscribe-event-table */}
       {/* #subscribe-event */}
-      {/* #subscribe-event-fields */}
-      {/* #subscribe-event-state */}
     </Card>
   )
 }
-// #subscribe-event-table
-// #subscribe-event-fields
 // #subscribe-event
-// #subscribe-event-state

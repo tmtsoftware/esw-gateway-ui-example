@@ -1,16 +1,16 @@
-# Adding Submit Command Example
+# Adding a Submit Command
 
-In this use case, we want to send a command (Setup/Observe) to an Assembly/HCD from the UI application via Gateway server.
+In this part of the tutorial, we want to send a Setup Command to an Assembly from the UI application via Gateway server.
 
 Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/params/commands.html) to learn more about commands.
 
-Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/commons/create-component.html) to learn more about Assembly / HCD components.
+Visit [here](https://tmtsoftware.github.io/csw/$csw-version$/commons/create-component.html) to learn more about components.
 
 ## Start an Assembly using esw-shell
 
-Before moving ahead, if you have not started backend services. Then let's start backend services by following @ref:[this](./base-flow.md#starting-backend-services) steps.
-
-Now, lets setup an assembly using esw-shell utility. It starts an ammonite repl with basic api's for us to orchestrate the backend services.
+We will use the esw-shell utility to create and start a simple Assembly. The esw-shell is a REPL application that provides 
+numerous tools for TMT programming.  Visit [here](https://tmtsoftware.github.io/esw/$esw-version$/eswshell/esw-shell.html) 
+to learn more about the esw-shell utility.
 
 ```bash
 cs install esw-shell
@@ -18,12 +18,13 @@ esw-shell start
 @                 // you are inside ammonite repl now
 ```
 
-Visit [here](https://tmtsoftware.github.io/esw/$esw-version$/eswshell/esw-shell.html) to learn more about the esw-shell utility.
+We will use an esw-shell 
+[feature](https://tmtsoftware.github.io/esw/$esw-version$/eswshell/esw-shell.html#using-custom-component-handlers) 
+that allows the dynamic creation of component by specifying command handler functionality when spawning the component.
 
-we are using [this](https://tmtsoftware.github.io/esw/$esw-version$/eswshell/esw-shell.html#using-custom-component-handlers) API to start our assembly with our custom handlers.
-
-This assembly takes `sleep` command with `sleepInSeconds` (LongKey) parameter and returns `Started Response` immediately and then `Completed response` after the given sleep value.
-Any other command other than `sleep` returns Completed Response.
+Our assembly will take a `sleep` command with `sleepInSeconds` (LongKey) parameter.  This is a long-running command
+which will return a `Started` response immediately and then a `Completed` response after sleeping the time provided
+in the parameter. Any other command other than `sleep` immediately returns a `Completed` response.
 
 Run this command inside esw-shell's ammonite shell:
 
@@ -52,67 +53,71 @@ This should start an assembly with prefix `ESW.defaultAssembly`.
 
 ## Add Submit Command Component
 
-Assuming that you have followed atleast the @ref:[basic flow](./base-flow.md), we can go further and add submiting an command to an assembly feature in our UI.
+Assuming that you have followed the @ref:[basic flow](./base-flow.md), we can go further and add functionality to the
+UI to submit a command to our assembly. 
 
-Add `SubmitCommand.tsx` in `src/components` folder.
+Create the file `SubmitCommand.tsx` in the `src/components` folder.
 
-SubmitCommand.tsx looks like following:
-
-@@@note
-You can refer the source code of the completed application at any point in the course of this tutorial.
-You can find it @link:[here](https://github.com/tmtsoftware/esw-gateway-ui-example)
-@@@
+Copy the following code into `SubmitCommand.tsx`:
 
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command }
 
-Add appropriate imports to the file.
+There is a lot to unpack here, so we will describe the code in sections. 
 
-Typescript
-: @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command-imports }
-
-Let's add the Form component's for the input fields within `<Card>{below code goes here}</Card>` component.
+Within the return statement, we specify a `<Card>` component to be the root component of our form.  Here we provide
+some styling as well as titles for our sections, and a section at the bottom to display the result. 
+The form for composing the command in encoded in a `<Form>` component.  Within it, we have the following components:
 
 * CommandType - A Selectable with Options(Setup/Observe)
 * ComponentType - A Selectable with Options(Assembly/HCD)
-* Prefix - A Text Input (user to put Appropriate Prefix of earlier Started Assembly)
+* Prefix - A Text Input (user to put Appropriate Prefix of our Assembly)
 * Command - A Text Input (user to put command `sleep` or anything else)
-* Sleep - A Optional field visible only when command is `sleep`.
+* Sleep - A Optional field visible only when command is `sleep` (Time to sleep in seconds).
 * Submit - A Button to submit command.
 
-Typescript
-: @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command-form }
-
-Add the following react states to hold the information of their corresponding user inputs.
-
-The following snippet goes below `authData` state inside component.
+In the definition of the `SubmitCommand` object near the top of the file, we define React 
+[state hooks](https://reactjs.org/docs/hooks-state.html) to store the values specified in our form.  
 
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command-states }
 
-Now finally, add the `submit` action to be called on Submit button click(i.e. `onFinish` handle of Form component)
+The definition of each state specifies a tuple that gives the name of variable to hold the value, and the name of the 
+setter method for that state variable.  These are used in each corresponding Form component in the `value` 
+and `onChange` attributes.
 
-This method makes use of [command service](https://tmtsoftware.github.io/esw-ts/services/command-service.html) typescript client which sits on top of the gateway server Command Service routes.
-
-Define this function adjacent to all the react state's inside component.
+Next, note the `submit` method defined after the command state hooks.  This defines the action to be called when the
+Submit button is clicked.  This is linked to the Button component in the `onFinish` attribute.
 
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-action }
 
-## Render SubmitCommand result's
+This method makes use of the [Command Service](https://tmtsoftware.github.io/esw-ts/services/command-service.html) 
+Typescript client which provides access to the Command Service routes in the Gateway.  It constructs the appropriate command
+from the form and submits it to the Assembly as specified by the Prefix field.  It then gets the results and calls the
+`SetResult` state hook setter.  This causes the result to be displayed in the result component, 
+which we defined at the bottom of the Card component: 
 
-Add this helper function to render color corresponding to the SubmitResponse's type.
+Typescript
+: @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #submit-command-result }
 
-This function goes outside the component because it is independent of react component's state.
+
+We provide additional functionality to help track result status by color coding a small flag in result component based 
+on its type.  Note that the color of the flag depends on the evaluation of a method we define at the top of the file, which 
+returns the appropriate color based on the result type.  This function goes outside of the component because it is 
+independent of React component's state.
 
 Typescript
 : @@snip [SubmitCommand.tsx](../../../../src/components/SubmitCommand.tsx) { #color-helper }
+
+
 
 ## Integrate SubmitCommand Component
 
 Finally, update Main.tsx to include `SubmitCommand` component.
 
-Add the following `<SubmitCommand />` component below div's style tag.
+Replace the Hello World text with our component, `<SubmitCommand />`, below `div`'s style tag, and add the necessary
+import.
 
 Typescript
 : @@snip [Main.tsx](../../../../src/components/Main.tsx) { #submit-command }
@@ -123,8 +128,6 @@ UI should render the following view at this moment.
 
 Fill in the values for all input fields and submit.
 
-That's all we needed to do for adding an Submit command feature!!!
-
 ```text
 prefix : ESW.defaultAssembly
 command : sleep
@@ -133,12 +136,12 @@ sleep : 2
 
 The UI should be updated with the following results.
 
-First UI recieves started resposne.
+First the UI receives `Started` response.
 
 ![started](../images/started.png)
 
-And after 2 seconds `Completed` response is received.
+And after 2 seconds, the `Completed` response is received.
 
 ![completed](../images/Completed.png)
 
-* Follow the tutorial @ref:[here](./subscribe-event.md) to add Subscribe Event Example.
+* Follow the tutorial @ref:[here](./subscribe-event.md) to add the Subscribe Event functionality.
