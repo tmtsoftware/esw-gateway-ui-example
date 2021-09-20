@@ -15,11 +15,11 @@ version := {
 }
 
 lazy val CSW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
-  case "true" => "4.0.0-RC1"
+  case "true" => "4.0.0-RC2"
 }
 
 lazy val ESW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
-  case "true" => "0.3.0-RC1"
+  case "true" => "0.3.0-RC2"
 }
 
 lazy val openSite =
