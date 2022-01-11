@@ -12,8 +12,7 @@ import { AppConfig } from './config/AppConfig'
 import { LocationServiceProvider } from './contexts/LocationServiceContext'
 import { useQuery } from './hooks/useQuery'
 
-const basename =
-  import.meta.env.NODE_ENV === 'production' ? AppConfig.applicationName : ''
+const basename = import.meta.env.PROD ? AppConfig.applicationName : ''
 //#auth-context
 const App = (): JSX.Element => {
   // ..

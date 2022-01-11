@@ -1,16 +1,14 @@
 import { screen, render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {
-  Event,
   EventName,
-  EventService,
-  IntKey,
   intKey,
   Parameter,
   Prefix,
   SystemEvent,
   TestUtils
 } from '@tmtsoftware/esw-ts'
+import type { Event, EventService, IntKey } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import React from 'react'
 import { anything, instance, mock, when } from 'ts-mockito'

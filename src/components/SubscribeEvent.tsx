@@ -1,13 +1,12 @@
 // #subscribe-event-imports
 import {
-  Event,
   EventKey,
   EventName,
   EventService,
   intKey,
-  Prefix,
-  Subscription
+  Prefix
 } from '@tmtsoftware/esw-ts'
+import type { Event, Subscription } from '@tmtsoftware/esw-ts'
 import {
   Button,
   Card,

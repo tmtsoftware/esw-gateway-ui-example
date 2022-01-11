@@ -1,6 +1,7 @@
 import { screen, render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { CommandService, SubmitResponse, TestUtils } from '@tmtsoftware/esw-ts'
+import { CommandService, TestUtils } from '@tmtsoftware/esw-ts'
+import type { SubmitResponse } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import React from 'react'
 import { anything, instance, mock, when } from 'ts-mockito'

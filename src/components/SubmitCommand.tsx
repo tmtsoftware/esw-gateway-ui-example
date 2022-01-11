@@ -5,9 +5,9 @@ import {
   longKey,
   Observe,
   Prefix,
-  Setup,
-  SubmitResponse
+  Setup
 } from '@tmtsoftware/esw-ts'
+import type { SubmitResponse } from '@tmtsoftware/esw-ts'
 import {
   Badge,
   Button,
