@@ -7,4 +7,3 @@
 4. update `sbt-docs` versions in top level `plugins.sbt` used by `docs` project
 5. Commit and push changes
 6. create appropriate release tag using git and push the tag e.g. `git tag v0.1.0-RC1` and `git push origin v0.1.0-RC1`
-7. Run `sbt -Dprod.publish=true` and run `ghpagesPushSite` command inside sbt.
