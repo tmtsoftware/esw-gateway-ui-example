@@ -1,7 +1,7 @@
 import org.tmt.sbt.docs.DocKeys._
 import org.tmt.sbt.docs.Settings
 
-ThisBuild / scalaVersion := "2.13.6"
+ThisBuild / scalaVersion := "2.13.8"
 ThisBuild / organizationName := "TMT Org"
 ThisBuild / docsRepo := "https://github.com/tmtsoftware/tmtsoftware.github.io.git"
 ThisBuild / docsParentDir := "esw-gateway-ui-example"
@@ -10,11 +10,11 @@ ThisBuild / gitCurrentRepo := "https://github.com/tmtsoftware/esw-gateway-ui-exa
 version := sys.env.getOrElse("JITPACK_VERSION", "0.1.0-SNAPSHOT")
 
 lazy val CSW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
-  case "true" => "4.0.0"
+  case "true" => "4.0.1-RC1"
 }
 
 lazy val ESW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
-  case "true" => "0.3.0"
+  case "true" => "0.4.0-RC1"
 }
 
 lazy val openSite =
