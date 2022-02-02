@@ -7,7 +7,7 @@ ThisBuild / docsRepo := "https://github.com/tmtsoftware/tmtsoftware.github.io.gi
 ThisBuild / docsParentDir := "esw-gateway-ui-example"
 ThisBuild / gitCurrentRepo := "https://github.com/tmtsoftware/esw-gateway-ui-example"
 
-version := sys.env.getOrElse("JITPACK_VERSION", "0.1.0-SNAPSHOT")
+ThisBuild / version := sys.env.getOrElse("JITPACK_VERSION", "0.1.0-SNAPSHOT")
 
 lazy val CSW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
   case "true" => "4.0.1-RC1"
