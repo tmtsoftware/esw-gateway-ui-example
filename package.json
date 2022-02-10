@@ -1,7 +1,7 @@
 {
   "name": "esw-gateway-ui-example",
   "author": "TMT",
-  "version": "0.2.0-RC1",
+  "version": "0.2.0",
   "license": "Apache License, Version 2.0",
   "private": true,
   "type": "module",
