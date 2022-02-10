@@ -10,11 +10,11 @@ ThisBuild / gitCurrentRepo := "https://github.com/tmtsoftware/esw-gateway-ui-exa
 ThisBuild / version := sys.env.getOrElse("JITPACK_VERSION", "0.1.0-SNAPSHOT")
 
 lazy val CSW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
-  case "true" => "4.0.1-RC1"
+  case "true" => "4.0.1"
 }
 
 lazy val ESW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
-  case "true" => "0.4.0-RC1"
+  case "true" => "0.4.0"
 }
 
 lazy val openSite =
