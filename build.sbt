@@ -47,8 +47,8 @@ lazy val docs = project
       }
     },
     paradoxProperties ++= Map(
-      "esw-version"             -> ESW_VERSION.getOrElse("0.1.0-SNAPSHOT"),
-      "csw-version"             -> CSW_VERSION.getOrElse("0.1.0-SNAPSHOT")
+      "esw-version"             -> ESW_VERSION.getOrElse("0.5.0"),
+      "csw-version"             -> CSW_VERSION.getOrElse("5.1.0")
     )
   )
 
