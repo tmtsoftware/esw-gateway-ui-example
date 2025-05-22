@@ -71,7 +71,6 @@ export const SubscribeEvent = ({
     },
     {
       title: 'Values',
-      // eslint-disable-next-line react/display-name
       render: (_: string, event: Event) => {
         const counterParam = event.get(intKey('counter')) ?? { values: [] }
         return <span>{counterParam.values.join(',')}</span>

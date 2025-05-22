@@ -82,8 +82,7 @@ export const SubmitCommand = ({
       switch (result._type) {
         case 'Started':
           setResult(result)
-          const res = await commandService.queryFinal(result.runId, 5)
-          setResult(res)
+          setResult(await commandService.queryFinal(result.runId, 5))
           break
         default:
           setResult(result)
