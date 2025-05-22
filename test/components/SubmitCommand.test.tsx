@@ -4,7 +4,7 @@ import { CommandService, TestUtils } from '@tmtsoftware/esw-ts'
 import type { SubmitResponse } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import React from 'react'
-import { anything, instance, mock, when } from 'ts-mockito'
+import { anything, instance, mock, when } from '@johanblumenberg/ts-mockito'
 import { SubmitCommand } from '../../src/components/SubmitCommand'
 
 describe('Submit command example', () => {
@@ -12,6 +12,7 @@ describe('Submit command example', () => {
   const commandServiceInstance = instance(commandServiceMock)
 
   it('should successfully send command and render result', async () => {
+    const user = userEvent.setup()
     render(<SubmitCommand _commandService={commandServiceInstance} />)
 
     const prefixInput = (await screen.findByRole('Prefix')) as HTMLInputElement
@@ -19,8 +20,8 @@ describe('Submit command example', () => {
       'commandName'
     )) as HTMLInputElement
 
-    userEvent.type(prefixInput, 'ESW.sample')
-    userEvent.type(commandInput, 'noop')
+    await user.type(prefixInput, 'ESW.sample')
+    await user.type(commandInput, 'noop')
     when(commandServiceMock.submit(anything())).thenResolve({
       _type: 'Completed',
       runId: 'fce332f8-25ab-4faa-b85e-bf9f71639956',

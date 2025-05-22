@@ -25,7 +25,7 @@ export const SubscribeEvent = ({
   _eventService
 }: {
   _eventService?: EventService
-}): JSX.Element => {
+}): React.JSX.Element => {
   const { auth } = useAuth()
   const authData = { tokenFactory: () => auth?.token() }
   // #subscribe-event

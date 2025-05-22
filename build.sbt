@@ -1,7 +1,7 @@
 import org.tmt.sbt.docs.DocKeys._
 import org.tmt.sbt.docs.Settings
 
-ThisBuild / scalaVersion := "2.13.8"
+ThisBuild / scalaVersion := "3.6.4"
 ThisBuild / organizationName := "TMT Org"
 ThisBuild / docsRepo := "https://github.com/tmtsoftware/tmtsoftware.github.io.git"
 ThisBuild / docsParentDir := "esw-gateway-ui-example"
@@ -10,11 +10,11 @@ ThisBuild / gitCurrentRepo := "https://github.com/tmtsoftware/esw-gateway-ui-exa
 ThisBuild / version := sys.env.getOrElse("JITPACK_VERSION", "0.1.0-SNAPSHOT")
 
 lazy val CSW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
-  case "true" => "4.0.1"
+  case "true" => "6.0.0"
 }
 
 lazy val ESW_VERSION: Option[String] = sys.props.get("prod.publish").collect {
-  case "true" => "0.4.0"
+  case "true" => "1.0.2"
 }
 
 lazy val openSite =
@@ -47,8 +47,8 @@ lazy val docs = project
       }
     },
     paradoxProperties ++= Map(
-      "esw-version"             -> ESW_VERSION.getOrElse("0.5.0"),
-      "csw-version"             -> CSW_VERSION.getOrElse("5.1.0")
+      "esw-version"             -> ESW_VERSION.getOrElse("1.0.2"),
+      "csw-version"             -> CSW_VERSION.getOrElse("6.0.0")
     )
   )
 

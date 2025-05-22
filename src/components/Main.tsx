@@ -8,7 +8,7 @@ import { SubmitCommand } from './SubmitCommand'
 import { SubscribeEvent } from './SubscribeEvent'
 // #auth
 //#submit-command
-export const Main = (): JSX.Element => {
+export const Main = (): React.JSX.Element => {
   const { auth } = useAuth()
   if (!auth) return <div>Loading</div>
   const isAuthenticated = auth?.isAuthenticated() ?? false
@@ -34,7 +34,7 @@ export const Main = (): JSX.Element => {
 // #submit-command
 
 // added for paradox
-export const Main2 = (): JSX.Element => {
+export const Main2 = (): React.JSX.Element => {
   const { auth } = useAuth()
   if (!auth) return <div>Loading</div>
   const isAuthenticated = auth?.isAuthenticated() ?? false

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
-export const Login = (): JSX.Element => {
+export const Login = (): React.JSX.Element => {
   const { login } = useAuth()
 
   useEffect(login, [login])

@@ -1,9 +1,27 @@
+import { chromeLauncher } from '@web/test-runner'
 import { vitePlugin } from '@remcovaes/web-test-runner-vite-plugin';
+process.env.NODE_ENV = 'development'
 
-process.env.NODE_ENV = 'test'
 export default {
+  concurrency: 1,
+  browsers: [
+    chromeLauncher({
+      launchOptions: {
+        executablePath: '/local/jenkins/jobs/ESW-OCS-Engineering-UI-Nightly/workspace/chrome-linux64/chrome',
+        headless: true,
+        devtools: true,
+      },
+    }),
+  ],
+  concurrentBrowsers: 1,
+  testsFinishTimeout: 500000,
+  testFramework: {
+    config: {
+      timeout: '3000'
+    }
+  },
   plugins: [
-    vitePlugin(),
+    vitePlugin()
   ],
   testRunnerHtml: (testFramework) => `
     <html>

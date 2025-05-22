@@ -14,7 +14,7 @@ import { useQuery } from './hooks/useQuery'
 
 const basename = import.meta.env.PROD ? AppConfig.applicationName : ''
 //#auth-context
-const App = (): JSX.Element => {
+export const App = (): React.JSX.Element => {
   // ..
   // ..
   const { error, data: initialised } = useQuery(() =>

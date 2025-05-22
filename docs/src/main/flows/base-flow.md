@@ -17,7 +17,7 @@ build the frontend created by the template.  This will also help ensure you have
 ### Compile the Frontend
 
 The `sample/src` sub-folder is where your frontend application is located.  It uses Typescript, React and node.
-Make sure node version `v16.0.0` or higher is installed in your machine. Let's compile our generated application.
+Make sure node version `v22.15.1` and npm 10.9.2 or higher are installed on your machine. Let's compile our generated application.
 
 ```bash
 cd sample
@@ -55,8 +55,8 @@ building your UI.  ESW-TS documentation can be found [here](http://tmtsoftware.g
 
 ### Create login component
 
-Use of the TMT Command Service via the UI Gateway requires authentication.  The user must login via the TMT AAS login 
-page, so we will add a login component from the ESW-TS library.  Create a `Login.tsx` file in the `src/components` folder 
+Use of the TMT Command Service via the UI Gateway requires authentication.  The user must login via the TMT AAS login
+page, so we will add a login component from the ESW-TS library.  Create a `Login.tsx` file in the `src/components` folder
 which will redirect the user to the TMT login page. Later we will use this `Login` Component in `Main.tsx`.
 
 Copy the full snippet shown below & paste it in Login.tsx
@@ -73,13 +73,13 @@ Copy the full snippet shown below and replace the contents in `Main.tsx`.
 Typescript
 : @@snip [Main.tsx](../../../../src/components/Main.tsx) { #auth }
 
-Here, you will see that there is a check to see if the user is authenticated, and if not, the login component will be 
+Here, you will see that there is a check to see if the user is authenticated, and if not, the login component will be
 shown.  If the user is authenticated, the normal functionality of the app is presented, which right now, is just the
 Hello World page.
 
-In order for our main component to have access to authentication logic from ESW-TS, we need to add a 
+In order for our main component to have access to authentication logic from ESW-TS, we need to add a
 [context provider](https://reactjs.org/docs/context.html) to the component.  We do this when the component is constructed
-at the top level.  We will wrap our Main application with `AuthContextProvider` from `esw-ts` in `App.tsx` 
+at the top level.  We will wrap our Main application with `AuthContextProvider` from `esw-ts` in `App.tsx`
 as shown below
 
 Copy the snippet within the `return` statement from the following & update `App.tsx`.
@@ -93,7 +93,7 @@ After adding this section, run the following command to see the progress that we
 npm start
 ```
 
-You should now see `Loading...` on the browser screen.  
+You should now see `Loading...` on the browser screen.
 
 ![login](../images/login.png)
 
@@ -113,11 +113,11 @@ Start the UI Gateway Service using esw-services.
 
 ```bash
 cs install esw-services
-esw-services start -g
+esw-services start start-eng-ui-services
 
 ```
 
-Now try reloading the front end in browser.  If the page is still up, refresh the page.  If you closed it, restart the 
+Now try reloading the front end in browser.  If the page is still up, refresh the page.  If you closed it, restart the
 server using:
 
 ```bash

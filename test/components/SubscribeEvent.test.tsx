@@ -11,7 +11,7 @@ import {
 import type { Event, EventService, IntKey } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import React from 'react'
-import { anything, instance, mock, when } from 'ts-mockito'
+import { anything, instance, mock, when } from '@johanblumenberg/ts-mockito'
 import { SubscribeEvent } from '../../src/components/SubscribeEvent'
 
 describe('Subscribe event example', () => {
@@ -28,6 +28,7 @@ describe('Subscribe event example', () => {
   )
 
   it('should subscribe to an particular event keyname', async () => {
+    const user = userEvent.setup()
     render(<SubscribeEvent _eventService={eventServiceInstance} />)
 
     const prefixInput = (await screen.findByRole(
@@ -37,8 +38,8 @@ describe('Subscribe event example', () => {
       'keyName'
     )) as HTMLInputElement
 
-    userEvent.type(prefixInput, 'ESW.sample')
-    userEvent.type(keyNameInput, 'counterEvent')
+    await user.type(prefixInput, 'ESW.sample')
+    await user.type(keyNameInput, 'counterEvent')
 
     const subscribeButton = (await screen.findByRole(
       'subscribe'

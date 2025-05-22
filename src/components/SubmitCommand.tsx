@@ -44,7 +44,7 @@ export const SubmitCommand = ({
   _commandService
 }: {
   _commandService?: CommandService
-}): JSX.Element => {
+}): React.JSX.Element => {
   const { auth } = useAuth()
   const authData = { tokenFactory: () => auth?.token() }
 
